@@ -39,15 +39,9 @@ export function buildBACScoringPrompt(
   const uploadedFilesList = uploadedFiles
     .map(
       (f, i) =>
-        `FILE ${i + 1}: "${f.fileName}"${
-          f.matchedRequirement ? ` (matches: ${f.matchedRequirement})` : ""
-        }
+        `FILE ${i + 1}: "${f.fileName}"
 --- CONTENT START ---
-${f.text}${
-          f.text.length > 3000
-            ? "\n[... content truncated for analysis ...]"
-            : ""
-        }
+${f.text}
 --- CONTENT END ---`
     )
     .join("\n\n");
