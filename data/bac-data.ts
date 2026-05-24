@@ -775,7 +775,7 @@ export function deleteCriterion(
   criterionId: string
 ): boolean {
   const std = standards.find((s) => s.id === standardId);
-  if (!std) return null;
+  if (!std) return false;
   const idx = std.criteria.findIndex((c) => c.id === criterionId);
   if (idx === -1) return false;
   std.criteria.splice(idx, 1);
