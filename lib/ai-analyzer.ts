@@ -63,20 +63,21 @@ ${d}${d.length > 2000 ? "\n[truncated]" : ""}`
   .join("\n\n")}`
       : "";
 
-  const missingFiles = criterion.requiredFiles.filter((req) => {
-    return !uploadedFiles.some(
-      (f) =>
-        f.matchedRequirement === req ||
-        f.fileName.toLowerCase().includes(req.toLowerCase())
-    );
-  });
+  // const missingFiles = criterion.requiredFiles.filter((req) => {
+  //   return !uploadedFiles.some(
+  //     (f) =>
+  //       f.matchedRequirement === req ||
+  //       f.fileName.toLowerCase().includes(req.toLowerCase())
+  //   );
+  // });
 
-  const missingList =
-    missingFiles.length > 0
-      ? `\nMISSING FILES (not uploaded by user):\n${missingFiles
-          .map((f) => `- ${f}`)
-          .join("\n")}`
-      : "\nAll required files were uploaded.";
+  // const missingList =
+  //   missingFiles.length > 0
+  //     ? `\nMISSING FILES (not uploaded by user):\n${missingFiles
+  //         .map((f) => `- ${f}`)
+  //         .join("\n")}`
+  //     : "\nAll required files were uploaded.";
+  const missingList = ""; // AI will determine missing files from content analysis
 
   return `You are an expert BAC (Bangladesh Accreditation Council) accreditation evaluator with 15+ years of experience evaluating university program documentation. Your task is to evaluate the provided documents against the specified BAC criterion and provide detailed, actionable feedback.
 
@@ -89,7 +90,6 @@ CRITERION WEIGHT: ${criterion.weight}/10
 
 === REQUIRED FILES FOR THIS CRITERION ===
 ${requiredFilesList}
-${missingList}
 
 === UPLOADED DOCUMENTS FOR EVALUATION ===
 ${
@@ -125,7 +125,7 @@ SCORING GUIDE:
 - 45-59: Below standard, significant gaps requiring major revisions
 - Below 45: Insufficient, fundamental requirements not met
 
-Be specific in feedback. Reference actual content from the documents. Provide actionable improvement suggestions grounded in BAC standards. If no files were uploaded, score should reflect that (very low score). The overallScore should account for missing required files by penalizing proportionally.`;
+Be specific in feedback. Reference actual content from the documents. Provide actionable improvement suggestions grounded in BAC standards. If no files were uploaded, score should reflect that (very low score). Based on the content of the uploaded files, determine which required files appear to be missing or inadequately represented. List these in the "missingFiles" array. The overallScore should account for missing required files by penalizing proportionally.`;
 }
 
 export async function analyzeWithAI(
