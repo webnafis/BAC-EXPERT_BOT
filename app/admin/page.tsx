@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import type { Standard, Criterion, DemoFile } from "@/data/bac-data";
+import { Loader, LoaderOverlay } from "@/components/Loader";
+import { Modal } from "@/components/Modal";
 
 type AdminView = "standards" | "criteria" | "demo-files";
 
@@ -12,6 +14,7 @@ export default function AdminPage() {
     null
   );
   const [loading, setLoading] = useState(false);
+  const [loadingStandards, setLoadingStandards] = useState(true);
   const [msg, setMsg] = useState<{
     text: string;
     type: "success" | "error";
@@ -31,14 +34,19 @@ export default function AdminPage() {
   const [extracting, setExtracting] = useState(false);
 
   const fetchStandards = async () => {
-    const res = await fetch("/api/admin/standards");
-    const data = await res.json();
-    setStandards(data.standards || []);
-    if (selectedStandard) {
-      const updated = (data.standards || []).find(
-        (s: Standard) => s.id === selectedStandard.id
-      );
-      setSelectedStandard(updated || null);
+    setLoadingStandards(true);
+    try {
+      const res = await fetch("/api/admin/standards");
+      const data = await res.json();
+      setStandards(data.standards || []);
+      if (selectedStandard) {
+        const updated = (data.standards || []).find(
+          (s: Standard) => s.id === selectedStandard.id
+        );
+        setSelectedStandard(updated || null);
+      }
+    } finally {
+      setLoadingStandards(false);
     }
   };
 
@@ -469,6 +477,9 @@ export default function AdminPage() {
               </button>
             </div>
 
+            {loadingStandards ? (
+              <Loader message="Loading BAC standards…" minHeight="280px" />
+            ) : (
             <div style={{ display: "grid", gap: "12px" }}>
               {standards.map((s) => (
                 <div
@@ -553,6 +564,7 @@ export default function AdminPage() {
                 </div>
               ))}
             </div>
+            )}
           </div>
         )}
 
@@ -630,6 +642,9 @@ export default function AdminPage() {
 
             {/* Criteria list */}
             {view === "criteria" && (
+              loadingStandards ? (
+                <Loader message="Loading criteria…" minHeight="280px" />
+              ) : (
               <div>
                 <div
                   style={{
@@ -793,10 +808,14 @@ export default function AdminPage() {
                   )}
                 </div>
               </div>
+              )
             )}
 
             {/* Demo Files list */}
             {view === "demo-files" && (
+              loadingStandards ? (
+                <Loader message="Loading demo files…" minHeight="280px" />
+              ) : (
               <div>
                 <div
                   style={{
@@ -947,6 +966,7 @@ export default function AdminPage() {
                   )}
                 </div>
               </div>
+              )
             )}
           </div>
         )}
@@ -961,8 +981,14 @@ export default function AdminPage() {
           onClose={() => setShowAddStandard(false)}
         >
           <div
-            style={{ display: "flex", flexDirection: "column", gap: "14px" }}
+            style={{
+              position: "relative",
+              display: "flex",
+              flexDirection: "column",
+              gap: "14px",
+            }}
           >
+            {loading && <LoaderOverlay message="Adding standard…" />}
             <div>
               <label style={labelStyle}>Standard Code *</label>
               <input
@@ -1017,8 +1043,14 @@ export default function AdminPage() {
       {showEditStandard && (
         <Modal title="Edit Standard" onClose={() => setShowEditStandard(null)}>
           <div
-            style={{ display: "flex", flexDirection: "column", gap: "14px" }}
+            style={{
+              position: "relative",
+              display: "flex",
+              flexDirection: "column",
+              gap: "14px",
+            }}
           >
+            {loading && <LoaderOverlay message="Saving changes…" />}
             <div>
               <label style={labelStyle}>Standard Code</label>
               <input
@@ -1081,8 +1113,14 @@ export default function AdminPage() {
           onClose={() => setShowAddCriterion(false)}
         >
           <div
-            style={{ display: "flex", flexDirection: "column", gap: "14px" }}
+            style={{
+              position: "relative",
+              display: "flex",
+              flexDirection: "column",
+              gap: "14px",
+            }}
           >
+            {loading && <LoaderOverlay message="Adding criterion…" />}
             <div
               style={{
                 display: "grid",
@@ -1184,8 +1222,14 @@ export default function AdminPage() {
           onClose={() => setShowEditCriterion(null)}
         >
           <div
-            style={{ display: "flex", flexDirection: "column", gap: "14px" }}
+            style={{
+              position: "relative",
+              display: "flex",
+              flexDirection: "column",
+              gap: "14px",
+            }}
           >
+            {loading && <LoaderOverlay message="Saving changes…" />}
             <div
               style={{
                 display: "grid",
@@ -1298,8 +1342,22 @@ export default function AdminPage() {
       {showAddDemo && (
         <Modal title="Add Demo File" onClose={() => setShowAddDemo(false)}>
           <div
-            style={{ display: "flex", flexDirection: "column", gap: "14px" }}
+            style={{
+              position: "relative",
+              display: "flex",
+              flexDirection: "column",
+              gap: "14px",
+            }}
           >
+            {(extracting || loading) && (
+              <LoaderOverlay
+                message={
+                  extracting
+                    ? "Extracting text from your document. This may take a moment…"
+                    : "Saving demo file…"
+                }
+              />
+            )}
             <div>
               <label style={labelStyle}>File Name *</label>
               <input
@@ -1397,8 +1455,22 @@ export default function AdminPage() {
       {showEditDemo && (
         <Modal title="Edit Demo File" onClose={() => setShowEditDemo(null)}>
           <div
-            style={{ display: "flex", flexDirection: "column", gap: "14px" }}
+            style={{
+              position: "relative",
+              display: "flex",
+              flexDirection: "column",
+              gap: "14px",
+            }}
           >
+            {(extracting || loading) && (
+              <LoaderOverlay
+                message={
+                  extracting
+                    ? "Extracting text from your document. This may take a moment…"
+                    : "Saving demo file…"
+                }
+              />
+            )}
             <div>
               <label style={labelStyle}>File Name</label>
               <input
@@ -1505,75 +1577,6 @@ export default function AdminPage() {
           </div>
         </Modal>
       )}
-    </div>
-  );
-}
-
-function Modal({
-  title,
-  children,
-  onClose,
-}: {
-  title: string;
-  children: React.ReactNode;
-  onClose: () => void;
-}) {
-  return (
-    <div
-      style={{
-        position: "fixed",
-        inset: 0,
-        background: "rgba(0,0,0,0.4)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        zIndex: 200,
-        padding: "24px",
-      }}
-      onClick={onClose}
-    >
-      <div
-        style={{
-          background: "#FFFFFF",
-          border: "1px solid rgba(0,106,78,0.18)",
-          borderRadius: "20px",
-          padding: "32px",
-          maxWidth: "600px",
-          width: "100%",
-          maxHeight: "90vh",
-          overflow: "auto",
-          boxShadow: "0 8px 40px rgba(0,0,0,0.12)",
-        }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginBottom: "24px",
-          }}
-        >
-          <h2 className="font-display" style={{ fontSize: "22px" }}>
-            {title}
-          </h2>
-          <button
-            onClick={onClose}
-            style={{
-              background: "none",
-              border: "none",
-              color: "var(--text-muted)",
-              cursor: "pointer",
-              fontSize: "24px",
-              fontFamily: "Plus Jakarta Sans",
-              lineHeight: 1,
-            }}
-          >
-            ×
-          </button>
-        </div>
-        {children}
-      </div>
     </div>
   );
 }

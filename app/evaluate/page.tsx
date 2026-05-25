@@ -3,6 +3,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import type { Standard, Criterion } from "@/data/bac-data";
 import type { AnalysisResult } from "@/lib/ai-analyzer";
+import { Loader } from "@/components/Loader";
 
 type Step = "standard" | "criterion" | "upload" | "result";
 
@@ -21,12 +22,15 @@ export default function EvaluatePage() {
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loadingStage, setLoadingStage] = useState(0);
+  const [loadingStandards, setLoadingStandards] = useState(true);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    setLoadingStandards(true);
     fetch("/api/admin/standards")
       .then((r) => r.json())
-      .then((d) => setStandards(d.standards || []));
+      .then((d) => setStandards(d.standards || []))
+      .finally(() => setLoadingStandards(false));
   }, []);
 
   const loadingStages = [
@@ -256,6 +260,12 @@ export default function EvaluatePage() {
                 against.
               </p>
             </div>
+            {loadingStandards ? (
+              <Loader
+                message="Loading BAC standards…"
+                minHeight="320px"
+              />
+            ) : (
             <div
               style={{ display: "flex", flexDirection: "column", gap: "12px" }}
             >
@@ -348,6 +358,7 @@ export default function EvaluatePage() {
                 </button>
               ))}
             </div>
+            )}
           </div>
         )}
 
@@ -390,6 +401,9 @@ export default function EvaluatePage() {
               </p>
             </div>
 
+            {loadingStandards ? (
+              <Loader message="Loading criteria…" minHeight="320px" />
+            ) : (
             <div
               style={{ display: "flex", flexDirection: "column", gap: "12px" }}
             >
@@ -504,6 +518,7 @@ export default function EvaluatePage() {
                 </button>
               ))}
             </div>
+            )}
           </div>
         )}
 
