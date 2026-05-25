@@ -264,7 +264,7 @@ export default function HomePage() {
                   fontSize: "48px",
                   fontFamily: "Playfair Display",
                   fontWeight: 900,
-                  color: "linear-gradient(135deg,#006A4E,#00956C)",
+                  color: "rgb(0, 106, 78)",
                   marginBottom: "12px",
                 }}
               >
