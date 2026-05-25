@@ -77,7 +77,7 @@ export default function HomePage() {
               width: "36px",
               height: "36px",
               borderRadius: "10px",
-              background: "linear-gradient(135deg,#3b82f6,#06b6d4)",
+              background: "linear-gradient(135deg,#006A4E,#00956C)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -131,7 +131,7 @@ export default function HomePage() {
             lineHeight: 1.1,
             marginBottom: "24px",
             background:
-              "linear-gradient(135deg,#e8f4ff 0%,#60a5fa 40%,#06b6d4 70%,#e8f4ff 100%)",
+              "linear-gradient(135deg,#003D2E 0%,#006A4E 40%,#00956C 70%,#F2FAF7 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
           }}
@@ -211,7 +211,7 @@ export default function HomePage() {
                 className="font-display"
                 style={{
                   fontSize: "32px",
-                  background: "linear-gradient(135deg,#3b82f6,#06b6d4)",
+                  background: "linear-gradient(135deg,#006A4E,#00956C)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   marginBottom: "6px",
@@ -264,7 +264,7 @@ export default function HomePage() {
                   fontSize: "48px",
                   fontFamily: "Playfair Display",
                   fontWeight: 900,
-                  color: "rgba(59,130,246,0.15)",
+                  color: "rgba(0,106,78,0.12)",
                   marginBottom: "12px",
                 }}
               >
@@ -360,8 +360,8 @@ export default function HomePage() {
             padding: "60px",
             textAlign: "center",
             background:
-              "linear-gradient(135deg,rgba(59,130,246,0.15) 0%,rgba(6,182,212,0.1) 100%)",
-            borderColor: "rgba(59,130,246,0.3)",
+              "linear-gradient(135deg,rgba(0,106,78,0.08) 0%,rgba(0,149,108,0.05) 100%)",
+            borderColor: "rgba(0,106,78,0.25)",
           }}
         >
           <h2

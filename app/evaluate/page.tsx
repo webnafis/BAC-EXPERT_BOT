@@ -88,8 +88,8 @@ export default function EvaluatePage() {
 
   const getScoreColor = (score: number) => {
     if (score >= 90) return "#10b981";
-    if (score >= 75) return "#06b6d4";
-    if (score >= 60) return "#f59e0b";
+    if (score >= 75) return "#006A4E";
+    if (score >= 60) return "#A37210";
     if (score >= 45) return "#f97316";
     return "#ef4444";
   };
@@ -144,7 +144,7 @@ export default function EvaluatePage() {
               width: "36px",
               height: "36px",
               borderRadius: "10px",
-              background: "linear-gradient(135deg,#3b82f6,#06b6d4)",
+              background: "linear-gradient(135deg,#006A4E,#00956C)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -185,10 +185,10 @@ export default function EvaluatePage() {
                     fontSize: "12px",
                     fontWeight: 600,
                     background: isDone
-                      ? "rgba(16,185,129,0.2)"
+                      ? "rgba(16,185,129,0.15)"
                       : isActive
-                      ? "linear-gradient(135deg,#3b82f6,#06b6d4)"
-                      : "rgba(255,255,255,0.05)",
+                      ? "linear-gradient(135deg,#006A4E,#00956C)"
+                      : "rgba(0,0,0,0.05)",
                     color: isDone
                       ? "#34d399"
                       : isActive
@@ -200,7 +200,7 @@ export default function EvaluatePage() {
                       ? "none"
                       : "1px solid var(--border)",
                     boxShadow: isActive
-                      ? "0 0 15px rgba(59,130,246,0.5)"
+                      ? "0 0 15px rgba(0,106,78,0.35)"
                       : "none",
                   }}
                 >
@@ -271,7 +271,7 @@ export default function EvaluatePage() {
                     width: "100%",
                     textAlign: "left",
                     padding: "20px 24px",
-                    background: "linear-gradient(135deg,#0c1a3a,#0f2150)",
+                    background: "#FFFFFF",
                     border: "1px solid var(--border)",
                     borderRadius: "14px",
                     cursor: "pointer",
@@ -284,10 +284,10 @@ export default function EvaluatePage() {
                     gap: "16px",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = "rgba(99,179,237,0.3)";
+                    e.currentTarget.style.borderColor = "rgba(0,106,78,0.35)";
                     e.currentTarget.style.transform = "translateY(-2px)";
                     e.currentTarget.style.boxShadow =
-                      "0 0 30px rgba(59,130,246,0.15)";
+                      "0 4px 20px rgba(0,106,78,0.10)";
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.borderColor = "var(--border)";
@@ -404,7 +404,7 @@ export default function EvaluatePage() {
                     width: "100%",
                     textAlign: "left",
                     padding: "20px 24px",
-                    background: "linear-gradient(135deg,#0c1a3a,#0f2150)",
+                    background: "#FFFFFF",
                     border: "1px solid var(--border)",
                     borderRadius: "14px",
                     cursor: "pointer",
@@ -417,10 +417,10 @@ export default function EvaluatePage() {
                     gap: "16px",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = "rgba(99,179,237,0.3)";
+                    e.currentTarget.style.borderColor = "rgba(0,106,78,0.35)";
                     e.currentTarget.style.transform = "translateY(-2px)";
                     e.currentTarget.style.boxShadow =
-                      "0 0 30px rgba(59,130,246,0.15)";
+                      "0 4px 20px rgba(0,106,78,0.10)";
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.borderColor = "var(--border)";
@@ -471,7 +471,7 @@ export default function EvaluatePage() {
                           className="tag"
                           style={{
                             fontSize: "10px",
-                            background: "rgba(255,255,255,0.03)",
+                            background: "rgba(0,0,0,0.03)",
                             border: "1px solid var(--border)",
                             color: "var(--text-muted)",
                             padding: "2px 8px",
@@ -581,7 +581,7 @@ export default function EvaluatePage() {
                         padding: "10px 14px",
                         background: isUploaded
                           ? "rgba(16,185,129,0.05)"
-                          : "rgba(255,255,255,0.02)",
+                          : "rgba(0,0,0,0.02)",
                         borderRadius: "8px",
                         border: `1px solid ${
                           isUploaded ? "rgba(16,185,129,0.2)" : "var(--border)"
@@ -611,9 +611,9 @@ export default function EvaluatePage() {
                           className="tag"
                           style={{
                             fontSize: "10px",
-                            background: "rgba(245,158,11,0.1)",
-                            color: "#fbbf24",
-                            border: "1px solid rgba(245,158,11,0.2)",
+                            background: "rgba(163,114,16,0.10)",
+                            color: "#A37210",
+                            border: "1px solid rgba(163,114,16,0.20)",
                             padding: "2px 8px",
                           }}
                         >
@@ -630,9 +630,9 @@ export default function EvaluatePage() {
                 style={{
                   marginTop: "16px",
                   padding: "14px",
-                  background: "rgba(59,130,246,0.05)",
+                  background: "rgba(0,106,78,0.05)",
                   borderRadius: "10px",
-                  border: "1px solid rgba(59,130,246,0.1)",
+                  border: "1px solid rgba(0,106,78,0.10)",
                 }}
               >
                 <p
@@ -642,7 +642,7 @@ export default function EvaluatePage() {
                     lineHeight: 1.6,
                   }}
                 >
-                  <strong style={{ color: "#60a5fa" }}>
+                  <strong style={{ color: "#006A4E" }}>
                     📌 Evaluation Guidelines:{" "}
                   </strong>
                   {selectedCriterion.guidelines}
@@ -743,9 +743,9 @@ export default function EvaluatePage() {
                         alignItems: "center",
                         gap: "12px",
                         padding: "12px 16px",
-                        background: "rgba(59,130,246,0.05)",
+                        background: "rgba(0,106,78,0.05)",
                         borderRadius: "10px",
-                        border: "1px solid rgba(59,130,246,0.15)",
+                        border: "1px solid rgba(0,106,78,0.12)",
                       }}
                     >
                       <span style={{ fontSize: "20px" }}>
@@ -913,7 +913,7 @@ export default function EvaluatePage() {
                     padding: "40px",
                     marginBottom: "24px",
                     background:
-                      "linear-gradient(135deg, rgba(59,130,246,0.1) 0%, rgba(6,182,212,0.05) 100%)",
+                      "linear-gradient(135deg, rgba(0,106,78,0.06) 0%, rgba(0,149,108,0.03) 100%)",
                     borderColor: `${getScoreColor(result.overallScore)}30`,
                     display: "flex",
                     gap: "40px",
@@ -929,7 +929,7 @@ export default function EvaluatePage() {
                         cy="50"
                         r="45"
                         fill="none"
-                        stroke="rgba(255,255,255,0.05)"
+                        stroke="rgba(0,0,0,0.06)"
                         strokeWidth="8"
                       />
                       <circle
@@ -945,9 +945,9 @@ export default function EvaluatePage() {
                         transform="rotate(-90 50 50)"
                         className="score-ring"
                         style={{
-                          filter: `drop-shadow(0 0 8px ${getScoreColor(
+                          filter: `drop-shadow(0 0 6px ${getScoreColor(
                             result.overallScore
-                          )}80)`,
+                          )}60)`,
                         }}
                       />
                       <text
@@ -965,7 +965,7 @@ export default function EvaluatePage() {
                         x="50"
                         y="62"
                         textAnchor="middle"
-                        fill="#5a7a99"
+                        fill="#7A9E92"
                         fontSize="8"
                         fontFamily="Plus Jakarta Sans"
                       >
@@ -1052,7 +1052,7 @@ export default function EvaluatePage() {
                       padding: "24px",
                       marginBottom: "24px",
                       borderColor: "rgba(239,68,68,0.3)",
-                      background: "rgba(239,68,68,0.05)",
+                      background: "rgba(239,68,68,0.04)",
                     }}
                   >
                     <h3
@@ -1082,7 +1082,7 @@ export default function EvaluatePage() {
                             alignItems: "center",
                             gap: "10px",
                             padding: "10px 14px",
-                            background: "rgba(239,68,68,0.05)",
+                            background: "rgba(239,68,68,0.04)",
                             borderRadius: "8px",
                             border: "1px solid rgba(239,68,68,0.15)",
                           }}
@@ -1185,7 +1185,7 @@ export default function EvaluatePage() {
                                   borderRadius: "50%",
                                   background: `radial-gradient(circle, ${getScoreColor(
                                     fr.score
-                                  )}15, transparent)`,
+                                  )}10, transparent)`,
                                   border: `3px solid ${getScoreColor(
                                     fr.score
                                   )}`,
@@ -1193,9 +1193,9 @@ export default function EvaluatePage() {
                                   alignItems: "center",
                                   justifyContent: "center",
                                   flexDirection: "column",
-                                  boxShadow: `0 0 20px ${getScoreColor(
+                                  boxShadow: `0 2px 12px ${getScoreColor(
                                     fr.score
-                                  )}30`,
+                                  )}25`,
                                 }}
                               >
                                 <span

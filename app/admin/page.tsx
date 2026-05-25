@@ -261,7 +261,7 @@ export default function AdminPage() {
               width: "32px",
               height: "32px",
               borderRadius: "8px",
-              background: "linear-gradient(135deg,#3b82f6,#06b6d4)",
+              background: "linear-gradient(135deg,#006A4E,#00956C)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -301,8 +301,8 @@ export default function AdminPage() {
           <span
             style={{
               marginLeft: "auto",
-              background: "rgba(59,130,246,0.2)",
-              color: "#60a5fa",
+              background: "rgba(0,106,78,0.15)",
+              color: "#006A4E",
               padding: "2px 8px",
               borderRadius: "20px",
               fontSize: "11px",
@@ -575,14 +575,14 @@ export default function AdminPage() {
                     padding: "10px 20px",
                     background: "none",
                     border: "none",
-                    color: view === v ? "#3b82f6" : "var(--text-muted)",
+                    color: view === v ? "#006A4E" : "var(--text-muted)",
                     fontFamily: "Plus Jakarta Sans",
                     fontWeight: 600,
                     fontSize: "14px",
                     cursor: "pointer",
                     borderBottom:
                       view === v
-                        ? "2px solid #3b82f6"
+                        ? "2px solid #006A4E"
                         : "2px solid transparent",
                     marginBottom: "-1px",
                   }}
@@ -653,9 +653,9 @@ export default function AdminPage() {
                               className="tag"
                               style={{
                                 fontSize: "10px",
-                                background: "rgba(59,130,246,0.1)",
-                                color: "#60a5fa",
-                                border: "1px solid rgba(59,130,246,0.2)",
+                                background: "rgba(0,106,78,0.08)",
+                                color: "#006A4E",
+                                border: "1px solid rgba(0,106,78,0.18)",
                                 padding: "2px 8px",
                               }}
                             >
@@ -694,7 +694,7 @@ export default function AdminPage() {
                                   className="tag"
                                   style={{
                                     fontSize: "11px",
-                                    background: "rgba(255,255,255,0.03)",
+                                    background: "rgba(0,0,0,0.03)",
                                     border: "1px solid var(--border)",
                                     color: "var(--text-secondary)",
                                     padding: "3px 8px",
@@ -710,7 +710,7 @@ export default function AdminPage() {
                               style={{
                                 marginTop: "10px",
                                 padding: "10px 12px",
-                                background: "rgba(59,130,246,0.05)",
+                                background: "rgba(0,106,78,0.05)",
                                 borderRadius: "8px",
                                 fontSize: "12px",
                                 color: "var(--text-secondary)",
@@ -836,7 +836,7 @@ export default function AdminPage() {
                           <div
                             style={{
                               padding: "12px",
-                              background: "rgba(0,0,0,0.2)",
+                              background: "rgba(0,0,0,0.04)",
                               borderRadius: "8px",
                               fontSize: "12px",
                               color: "var(--text-muted)",
@@ -1426,7 +1426,7 @@ function Modal({
       style={{
         position: "fixed",
         inset: 0,
-        background: "rgba(0,0,0,0.7)",
+        background: "rgba(0,0,0,0.4)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -1437,15 +1437,15 @@ function Modal({
     >
       <div
         style={{
-          background: "#0c1a3a",
-          border: "1px solid rgba(99,179,237,0.2)",
+          background: "#FFFFFF",
+          border: "1px solid rgba(0,106,78,0.18)",
           borderRadius: "20px",
           padding: "32px",
           maxWidth: "600px",
           width: "100%",
           maxHeight: "90vh",
           overflow: "auto",
-          boxShadow: "0 0 60px rgba(0,0,0,0.5)",
+          boxShadow: "0 8px 40px rgba(0,0,0,0.12)",
         }}
         onClick={(e) => e.stopPropagation()}
       >
