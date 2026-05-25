@@ -3,6 +3,7 @@ import { getStandardById } from "@/data/bac-data";
 import { analyzeWithAI, type UploadedFile } from "@/lib/ai-analyzer";
 import { extractTextFromFile } from "@/lib/file-extractor";
 
+export const runtime = "nodejs";
 export const maxDuration = 120;
 
 export async function POST(req: Request) {

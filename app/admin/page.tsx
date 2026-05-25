@@ -28,6 +28,7 @@ export default function AdminPage() {
   );
   const [showAddDemo, setShowAddDemo] = useState(false);
   const [showEditDemo, setShowEditDemo] = useState<DemoFile | null>(null);
+  const [extracting, setExtracting] = useState(false);
 
   const fetchStandards = async () => {
     const res = await fetch("/api/admin/standards");
@@ -221,6 +222,41 @@ export default function AdminPage() {
     });
     showMsg("Demo file deleted");
     fetchStandards();
+  };
+
+  const extractDemoFileContent = async (
+    file: File,
+    onExtracted: (text: string, fileName: string) => void
+  ) => {
+    if (!selectedStandard) return;
+    setExtracting(true);
+    const formData = new FormData();
+    formData.append("file", file);
+    try {
+      const res = await fetch(
+        `/api/admin/demo-files/${selectedStandard.id}/extract`,
+        { method: "POST", body: formData }
+      );
+      const data = await res.json();
+      if (res.ok) {
+        onExtracted(data.text, data.fileName);
+        showMsg(`Text extracted from ${data.fileName}`);
+      } else {
+        showMsg(data.error || "Failed to extract text", "error");
+      }
+    } catch {
+      showMsg("Failed to extract text from file", "error");
+    }
+    setExtracting(false);
+  };
+
+  const handleDemoFileUpload = (
+    files: FileList | null,
+    onExtracted: (text: string, fileName: string) => void
+  ) => {
+    const file = files?.[0];
+    if (!file) return;
+    extractDemoFileContent(file, onExtracted);
   };
 
   const labelStyle = {
@@ -1285,13 +1321,39 @@ export default function AdminPage() {
               />
             </div>
             <div>
-              <label style={labelStyle}>
-                Document Content (paste text content of the BAC-approved
-                document) *
-              </label>
+              <label style={labelStyle}>Upload Document (PDF or Word)</label>
+              <input
+                type="file"
+                accept=".pdf,.docx,.doc"
+                disabled={extracting}
+                onChange={(e) => {
+                  handleDemoFileUpload(e.target.files, (text, fileName) => {
+                    setDForm((p) => ({
+                      ...p,
+                      content: text,
+                      name: p.name || fileName,
+                    }));
+                  });
+                  e.target.value = "";
+                }}
+              />
+              <p
+                style={{
+                  color: "var(--text-muted)",
+                  fontSize: "12px",
+                  marginTop: "6px",
+                }}
+              >
+                {extracting
+                  ? "Extracting text from file..."
+                  : "Upload a .pdf or .docx file to fill the content below. Review and edit before saving."}
+              </p>
+            </div>
+            <div>
+              <label style={labelStyle}>Document Content *</label>
               <textarea
                 rows={8}
-                placeholder="Paste the full text content of the benchmark document here. This will be used by the AI for comparative scoring..."
+                placeholder="Upload a file above or paste text manually. This content is used by the AI for comparative scoring..."
                 value={dForm.content}
                 onChange={(e) =>
                   setDForm((p) => ({ ...p, content: e.target.value }))
@@ -1314,7 +1376,9 @@ export default function AdminPage() {
               <button
                 className="btn-primary"
                 onClick={addDemoFile}
-                disabled={loading || !dForm.name || !dForm.content}
+                disabled={
+                  loading || extracting || !dForm.name || !dForm.content
+                }
               >
                 {loading ? "Adding..." : "Add Demo File"}
               </button>
@@ -1358,6 +1422,39 @@ export default function AdminPage() {
               />
             </div>
             <div>
+              <label style={labelStyle}>Upload Document (PDF or Word)</label>
+              <input
+                type="file"
+                accept=".pdf,.docx,.doc"
+                disabled={extracting}
+                onChange={(e) => {
+                  handleDemoFileUpload(e.target.files, (text, fileName) => {
+                    setShowEditDemo((p) =>
+                      p
+                        ? {
+                            ...p,
+                            content: text,
+                            name: p.name || fileName,
+                          }
+                        : null
+                    );
+                  });
+                  e.target.value = "";
+                }}
+              />
+              <p
+                style={{
+                  color: "var(--text-muted)",
+                  fontSize: "12px",
+                  marginTop: "6px",
+                }}
+              >
+                {extracting
+                  ? "Extracting text from file..."
+                  : "Upload to replace content below. Review before saving."}
+              </p>
+            </div>
+            <div>
               <label style={labelStyle}>Content</label>
               <textarea
                 rows={8}
@@ -1394,7 +1491,7 @@ export default function AdminPage() {
               <button
                 className="btn-primary"
                 onClick={() => showEditDemo && updateDemoFile(showEditDemo)}
-                disabled={loading}
+                disabled={loading || extracting}
               >
                 {loading ? "Saving..." : "Save Changes"}
               </button>
