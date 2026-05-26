@@ -710,7 +710,7 @@ export default function AdminPage() {
                                 padding: "2px 8px",
                               }}
                             >
-                              Weight: {c.weight}/10
+                              Weight: {c.weight}
                             </span>
                           </div>
                           <p

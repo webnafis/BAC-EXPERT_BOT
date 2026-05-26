@@ -80,7 +80,7 @@ STANDARD: ${standard.code} - ${standard.title}
 CRITERION: ${criterion.code} - ${criterion.title}
 CRITERION DESCRIPTION: ${criterion.description}
 EVALUATION GUIDELINES: ${criterion.guidelines}
-CRITERION WEIGHT: ${criterion.weight}/10
+CRITERION WEIGHT: ${criterion.weight}
 
 === REQUIRED FILES FOR THIS CRITERION ===
 ${requiredFilesList}

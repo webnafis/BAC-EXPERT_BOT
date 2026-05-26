@@ -29,7 +29,7 @@ export const BAC_STANDARDS: Standard[] = [
   {
     id: "s1",
     code: "STD-1",
-    title: "Vision, Mission, and Goals",
+    title: "Governance",
     description:
       "The program must have clearly defined and documented vision, mission, goals, and objectives that are aligned with the institution's mission and relevant to the needs of society.",
     demoFiles: [
