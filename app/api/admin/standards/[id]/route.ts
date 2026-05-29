@@ -49,7 +49,7 @@ export async function PATCH(
   const body = await req.json();
 
   if (body.type === "add_criterion") {
-    const { code, title, description, requiredFiles, guidelines, weight } =
+    const { code, title, description, requiredFiles, guidelines, weight , checklistItems} =
       body;
     const criterion = addCriterion(id, {
       code,
@@ -58,6 +58,7 @@ export async function PATCH(
       requiredFiles: requiredFiles || [],
       guidelines: guidelines || "",
       weight: weight || 5,
+      checklistItems: checklistItems || [],
     });
     if (!criterion)
       return NextResponse.json(

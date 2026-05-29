@@ -7,24 +7,30 @@ export interface UploadedFile {
 }
 
 export interface AnalysisResult {
+  criterionCode: string;              // ← NEW
+  criterionTitle: string;
+  standardTitle: string;
+  maxPossibleScore: number;           // ← NEW
+  evaluationSummary: any; // ← NEW
   overallScore: number;
   overallFeedback: string;
   missingFiles: string[];
   fileResults: FileResult[];
-  standardTitle: string;
-  criterionTitle: string;
-  criterionCode: string;
+  recommendedAction: "PASS" | "MINOR_REVISION" | "MAJOR_REVISION" | "FAIL"; // ← NEW
 }
-
 export interface FileResult {
   fileName: string;
+  coveredFiles: string[];       // ← NEW
   score: number;
   feedback: string;
   strengths: string[];
   improvements: string[];
+  checklistResults: Record<string, boolean>; // ← NEW
 }
 
 const AI_BASE_URL = "https://frightful-negate-bony.ngrok-free.dev";
+
+// ai-analyzer.ts
 
 export function buildBACScoringPrompt(
   standard: Standard,
@@ -32,185 +38,310 @@ export function buildBACScoringPrompt(
   uploadedFiles: UploadedFile[],
   demoFileContents: string[]
 ): string {
+  const maxScore = criterion.weight;
+  const totalRequired = criterion.requiredFiles.length;
+
   const requiredFilesList = criterion.requiredFiles
-    .map((f, i) => `${i + 1}. ${f}`)
+    .map((f, i) => `  ${i + 1}. ${f}`)
     .join("\n");
 
-  const uploadedFilesList = uploadedFiles
-    .map(
-      (f, i) =>
-        `FILE ${i + 1}: "${f.fileName}"
---- CONTENT START ---
-${f.text}
---- CONTENT END ---`
-    )
-    .join("\n\n");
+  const uploadedFilesList =
+    uploadedFiles.length > 0
+      ? uploadedFiles
+          .map(
+            (f, i) => `
+┌─────────────────────────────────────────────────┐
+  UPLOADED FILE ${i + 1} of ${uploadedFiles.length}
+  Name: "${f.fileName}"
+  ${f.matchedRequirement
+    ? `Declared as: "${f.matchedRequirement}"`
+    : `Declared as: (not specified — auto-detect from content)`
+  }
+└─────────────────────────────────────────────────┘
+${f.text.trim()}
+══════════════════ END OF FILE ${i + 1} ══════════════════`
+          )
+          .join("\n\n")
+      : "  ⚠ NO FILES UPLOADED BY USER.";
 
-  const demoContext =
+  const benchmarkSection =
     demoFileContents.length > 0
-      ? `\n\nREFERENCE BENCHMARK (BAC-Approved Example Documents):
+      ? `
+╔══════════════════════════════════════════════════════════╗
+║         BAC BENCHMARK DOCUMENTS (Quality Reference)      ║
+╚══════════════════════════════════════════════════════════╝
+
+IMPORTANT INSTRUCTIONS FOR USING BENCHMARKS:
+- These documents represent what a well-prepared submission looks like
+- Use them to calibrate your quality expectations ONLY
+- Do NOT reward a user's document for looking similar to the benchmark
+- Do NOT penalize a user's document for coming from a different institution
+- The benchmark description tells you its known gaps — factor those in
+- Evaluate user documents on content quality and BAC compliance, not style
+
 ${demoFileContents
   .map(
-    (d, i) => `BENCHMARK ${i + 1}:
-${d}${d.length > 2000 ? "\n[truncated]" : ""}`
+    (d, i) => `
+── BENCHMARK ${i + 1} ──────────────────────────────────────
+${d}
+── END BENCHMARK ${i + 1} ──────────────────────────────────`
   )
-  .join("\n\n")}`
-      : "";
+  .join("\n")}`
+      : `
+╔══════════════════════════════════════════════════════════╗
+║                  BAC BENCHMARK DOCUMENTS                  ║
+╚══════════════════════════════════════════════════════════╝
+  ⚠ No benchmark documents available for this criterion.
+  Evaluate strictly based on BAC guidelines and expert knowledge.`;
 
-  // const missingFiles = criterion.requiredFiles.filter((req) => {
-  //   return !uploadedFiles.some(
-  //     (f) =>
-  //       f.matchedRequirement === req ||
-  //       f.fileName.toLowerCase().includes(req.toLowerCase())
-  //   );
-  // });
+  const s = {
+    full: maxScore,
+    good: Math.ceil(maxScore * 0.80),
+    adequate: Math.ceil(maxScore * 0.65),
+    weak: Math.ceil(maxScore * 0.50),
+    poor: Math.ceil(maxScore * 0.35),
+  };
 
-  // const missingList =
-  //   missingFiles.length > 0
-  //     ? `\nMISSING FILES (not uploaded by user):\n${missingFiles
-  //         .map((f) => `- ${f}`)
-  //         .join("\n")}`
-  //     : "\nAll required files were uploaded.";
-  const missingList = ""; // AI will determine missing files from content analysis
+  const weightTier = `CRITICAL : Non-negotiable for BAC accreditation. Any major gap MUST severely reduce the score.`;
+      // : criterion.weight >= 7
+      // ? `HIGH IMPORTANCE (weight ${criterion.weight}/10): Strong evidence required. Gaps should meaningfully reduce the score.`
+      // : `MODERATE (weight ${criterion.weight}/10): Partial fulfillment is noted but all gaps must still be documented.`;
 
-  return `You are an expert BAC (Bangladesh Accreditation Council) accreditation evaluator with 15+ years of experience evaluating university program documentation. Your task is to evaluate the provided documents against the specified BAC criterion and provide detailed, actionable feedback.
+  // Checklist from admin-managed data
+  const checklistItems = criterion.checklistItems && criterion.checklistItems.length > 0
+    ? criterion.checklistItems
+        .map((item, i) => `  ${i + 1}. [ ] ${item}`)
+        .join("\n")
+    : criterion.requiredFiles
+        .map((f, i) => `  ${i + 1}. [ ] Content covering "${f}" is present and substantive`)
+        .join("\n");
 
-=== EVALUATION CONTEXT ===
-STANDARD: ${standard.code} - ${standard.title}
-CRITERION: ${criterion.code} - ${criterion.title}
-CRITERION DESCRIPTION: ${criterion.description}
-EVALUATION GUIDELINES: ${criterion.guidelines}
-CRITERION WEIGHT: ${criterion.weight}
+  // Checklist short labels for JSON keys (first 5 words of each item)
+  const checklistKeys = (criterion.checklistItems && criterion.checklistItems.length > 0
+    ? criterion.checklistItems
+    : criterion.requiredFiles
+  ).map((item) => item.split(" ").join(" "));
 
-=== REQUIRED FILES FOR THIS CRITERION ===
+  const checklistSchemaExample = checklistKeys
+    .map((key) => `        "${key}...": <true if met, false if not>`)
+    .join(",\n");
+
+  return `You are a senior BAC (Bangladesh Accreditation Council) accreditation panel evaluator with 15+ years of hands-on experience reviewing university engineering and CSE program documentation. You have assessed 200+ institutional submissions and are an authority on BAC's 10 Standards and 63 Criteria framework.
+
+Your task is to perform a rigorous, structured evaluation of the uploaded document(s) against the specified BAC criterion and return a precise JSON evaluation report. Be strict, objective, and specific — vague or generic feedback is unacceptable.
+
+╔══════════════════════════════════════════════════════════╗
+║                    EVALUATION CONTEXT                    ║
+╚══════════════════════════════════════════════════════════╝
+
+STANDARD     : ${standard.code} — ${standard.title}
+DESCRIPTION  : ${standard.description}
+
+CRITERION    : ${criterion.code} — ${criterion.title}
+DESCRIPTION  : ${criterion.description}
+GUIDELINES   : ${criterion.guidelines}
+
+WEIGHT       : ${criterion.weight}
+IMPORTANCE   : ${weightTier}
+MAX SCORE    : ${maxScore} points (score ceiling = criterion weight, NOT 100)
+
+╔══════════════════════════════════════════════════════════╗
+║         REQUIRED EVIDENCE (${totalRequired} items expected)
+╚══════════════════════════════════════════════════════════╝
+
 ${requiredFilesList}
 
-=== UPLOADED DOCUMENTS FOR EVALUATION ===
-${
-  uploadedFiles.length > 0
-    ? uploadedFilesList
-    : "No files were uploaded by the user."
-}
-${demoContext}
+⚠ CONSOLIDATED DOCUMENT RULE:
+Departments commonly submit ALL required evidence inside a SINGLE document.
+This is acceptable and must NOT be penalized.
+Judge coverage by CONTENT PRESENCE, not by file count or file name matching.
 
-=== EVALUATION INSTRUCTIONS ===
-Analyze ALL uploaded documents thoroughly against the BAC criterion. Your evaluation must be STRICT but FAIR and follow BAC evaluation standards.
+╔══════════════════════════════════════════════════════════╗
+║           UPLOADED DOCUMENTS (${uploadedFiles.length} file(s) provided)
+╚══════════════════════════════════════════════════════════╝
 
-Return ONLY valid JSON (no markdown, no explanation outside JSON) in EXACTLY this format:
+${uploadedFilesList}
+${benchmarkSection}
+
+╔══════════════════════════════════════════════════════════╗
+║               EVALUATION STEPS (follow in order)        ║
+╚══════════════════════════════════════════════════════════╝
+
+STEP 1 — EVIDENCE COVERAGE CHECK
+For each of the ${totalRequired} required evidence items, determine:
+  a) Is the CONTENT of this evidence present in the uploaded document?
+     → Look for actual data/information — not just a matching heading or title
+  b) If present, is it COMPLETE and SUBSTANTIVE, or only superficially mentioned?
+  c) If absent or insufficient → add to "missingFiles" array
+
+All ${totalRequired} evidence items must exist within a single uploaded file.
+Read the full content before declaring anything missing.
+
+STEP 2 — CONTENT QUALITY ANALYSIS (per uploaded file)
+Evaluate each uploaded file across 5 dimensions:
+  a) Completeness  — Does it address all expected elements for this criterion?
+  b) Specificity   — Are claims backed by data, names, dates, measurable targets?
+  c) BAC Alignment — Does it directly satisfy what the criterion requires?
+  d) Formality     — Is it officially structured, approved, professionally written?
+  e) Benchmark Gap — How does quality compare to the reference benchmark?
+
+STEP 3 — CRITERION CHECKLIST
+Verify each checkpoint below for criterion ${criterion.code}.
+Each unmet checkpoint MUST reduce the score and appear in improvements:
+
+${checklistItems}
+
+For each checklist item, record true (met) or false (not met) in "checklistResults".
+Use the first few words of each item as the key.
+
+STEP 4 — SCORING RULES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SCORE RANGE: 0 to ${maxScore} — NOT 1 to 100
+Maximum possible score = ${maxScore} (criterion weight)
+the score
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SCORE SCALE (max = ${maxScore}):
+  ${s.full}           : Exemplary — all evidence present, exceeds BAC expectations
+  ${s.good}–${s.full - 1}        : Good — meets most requirements, minor gaps only
+  ${s.adequate}–${s.good - 1}        : Adequate — basic requirements met, improvements needed
+  ${s.weak}–${s.adequate - 1}        : Weak — significant gaps, major revision required
+  ${s.poor}–${s.weak - 1}        : Poor — fundamental requirements not met
+  0–${s.poor - 1}         : Critical — submission is irrelevant or empty
+
+SCORE CALCULATION:
+  → Start at ${maxScore} (full marks)
+  → Deduct per missing required evidence item: ${maxScore} / ${totalRequired} = ${(maxScore / totalRequired).toFixed(1)} pts each
+  → Deduct additionally for vague claims, missing approval evidence, low quality
+  → Bonus: add back if content is exceptionally detailed beyond BAC requirements
+  → Floor: 0 
+  → Ceiling: ${maxScore} 
+
+FILE SCORE vs OVERALL SCORE:
+  Always ONE document is submitted, file score = overall score.
+
+STEP 5 — FEEDBACK RULES
+  ✘ NEVER write generic praise like "good document" or "well structured"
+  ✘ NEVER write vague improvements like "add more detail"
+  ✓ ALWAYS cite specific content from the uploaded file by name or short quote
+  ✓ Improvements must state EXACTLY what to add, fix, or restructure
+  ✓ Strengths must reference ACTUAL content that correctly satisfies BAC
+  ✓ overallFeedback = 3–4 sentence expert verdict:
+      — Quality summary referencing actual content
+      — Most critical gap named specifically  
+      — Clear pass / revise / fail recommendation for this criterion
+
+╔══════════════════════════════════════════════════════════╗
+║                    RESPONSE FORMAT                       ║
+╚══════════════════════════════════════════════════════════╝
+
+Return ONLY valid JSON. No markdown, no code fences, no text outside JSON.
+
 {
-  "overallScore": <integer 1-100>,
-  "overallFeedback": "<2-3 sentence expert summary of the overall submission quality and alignment with BAC criterion>",
-  "missingFiles": [<list of required file names that are missing>],
+  "criterionCode": "${criterion.code}",
+  "criterionTitle": "${criterion.title}",
+  "maxPossibleScore": ${maxScore},
+  "evaluationSummary": {
+    "filesUploaded": <integer>,
+    "requiredEvidenceCount": ${totalRequired},
+    "evidenceCoveredCount": <integer — how many of the ${totalRequired} required items were found>,
+    "consolidatedDocument": <true if all evidence is in one file, false otherwise>,
+    "missingCriticalElements": ["<specific missing element>", ...]
+  },
+  "overallScore": <integer between 0 and ${maxScore}>,
+  "overallFeedback": "<3–5 sentence expert verdict citing actual content, naming the critical gap, stating PASS/REVISE/FAIL>",
+  "missingFiles": ["<required evidence item absent or insufficient in uploaded content>", ...],
   "fileResults": [
     {
-      "fileName": "<exact file name>",
-      "score": <integer 1-100>,
-      "feedback": "<2-3 sentence specific feedback about this file's content quality and BAC alignment>",
-      "strengths": ["<strength 1>", "<strength 2>", ...],
-      "improvements": ["<specific improvement 1>", "<specific improvement 2>", ...]
+      "fileName": "<exact uploaded file name>",
+      "coveredFiles": ["<which of the ${totalRequired} required items were found/covered exect from the list of evidences >", ...],
+      "score": <integer between 0 and ${maxScore} same as overall score>,
+      "feedback": "<2–5 sentences citing specific content and BAC alignment>",
+      "strengths": ["<specific strength referencing actual document content>", ...],
+      "improvements": ["<actionable: exactly what to add/fix/restructure>", ...],
+      "checklistResults": {
+${checklistSchemaExample}
+      }
     }
-  ]
+  ],
+  "recommendedAction": "<one of: PASS | MINOR_REVISION | MAJOR_REVISION | FAIL>"
+}`;
 }
 
-SCORING GUIDE:
-- 90-100: Exemplary, exceeds BAC expectations with comprehensive content
-- 75-89: Good, meets most BAC requirements with minor gaps
-- 60-74: Satisfactory, meets basic requirements but needs improvement
-- 45-59: Below standard, significant gaps requiring major revisions
-- Below 45: Insufficient, fundamental requirements not met
-
-Be specific in feedback. Reference actual content from the documents. Provide actionable improvement suggestions grounded in BAC standards. If no files were uploaded, score should reflect that (very low score). Based on the content of the uploaded files, determine which required files appear to be missing or inadequately represented. List these in the "missingFiles" array. The overallScore should account for missing required files by penalizing proportionally.`;
-}
-
+// Remove analyzeWithAI sanitizer — update to match new schema:
 export async function analyzeWithAI(
   standard: Standard,
   criterion: Criterion,
   uploadedFiles: UploadedFile[],
   demoFileContents: string[]
 ): Promise<AnalysisResult> {
-  const prompt = buildBACScoringPrompt(
-    standard,
-    criterion,
-    uploadedFiles,
-    demoFileContents
-  );
-  console.log(prompt);
+  const prompt = buildBACScoringPrompt(standard, criterion, uploadedFiles, demoFileContents);
+
   const response = await fetch(`${AI_BASE_URL}/api/chat`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      model: "qwen2.5:7b",
+      // model: "qwen2.5:7b",
+      model: "qwen2.5:14b",
       messages: [
         {
           role: "system",
-          content:
-            "You are a BAC accreditation expert evaluator. Always respond with valid JSON only, no markdown formatting, no code blocks.",
+          content: "You are a BAC accreditation expert evaluator. Always respond with valid JSON only, no markdown formatting, no code blocks.",
         },
-        {
-          role: "user",
-          content: prompt,
-        },
+        { role: "user", content: prompt },
       ],
       stream: false,
-      options: {
-        temperature: 0.3,
-        top_p: 0.9,
-      },
+      options: { temperature: 0, top_p: 1, top_k: 1, seed: 42, repeat_penalty: 1.0,},
     }),
   });
 
-  if (!response.ok) {
-    throw new Error(
-      `AI server error: ${response.status} ${response.statusText}`
-    );
-  }
+  if (!response.ok) throw new Error(`AI server error: ${response.status}`);
 
   const data = await response.json();
-  const aiText =
-    data?.message?.content || data?.choices?.[0]?.message?.content || "";
-
-  // Clean the response - remove markdown code blocks if present
-  const cleanedText = aiText
-    .replace(/```json\n?/g, "")
-    .replace(/```\n?/g, "")
-    .trim();
+  const aiText = data?.message?.content || data?.choices?.[0]?.message?.content || "";
+  const cleanedText = aiText.replace(/```json\n?/g, "").replace(/```\n?/g, "").trim();
 
   try {
     const parsed = JSON.parse(cleanedText);
+    const maxScore = criterion.weight;
 
-    // Validate and sanitize the response
     const result: AnalysisResult = {
-      overallScore: Math.min(
-        100,
-        Math.max(1, Number(parsed.overallScore) || 50)
-      ),
-      overallFeedback:
-        parsed.overallFeedback ||
-        "Analysis complete. Please review individual file scores.",
-      missingFiles: Array.isArray(parsed.missingFiles)
-        ? parsed.missingFiles
-        : [],
+      criterionCode: parsed.criterionCode || criterion.code,
+      criterionTitle: parsed.criterionTitle || criterion.title,
+      standardTitle: standard.title,
+      maxPossibleScore: maxScore,
+      evaluationSummary: {
+        filesUploaded: parsed.evaluationSummary?.filesUploaded ?? uploadedFiles.length,
+        requiredEvidenceCount: criterion.requiredFiles.length,
+        evidenceCoveredCount: parsed.evaluationSummary?.evidenceCoveredCount ?? 0,
+        consolidatedDocument: parsed.evaluationSummary?.consolidatedDocument ?? false,
+        missingCriticalElements: Array.isArray(parsed.evaluationSummary?.missingCriticalElements)
+          ? parsed.evaluationSummary.missingCriticalElements
+          : [],
+      },
+      overallScore: Math.min(maxScore, Math.max(0, Number(parsed.overallScore) ?? 0)),
+      overallFeedback: parsed.overallFeedback || "Analysis complete.",
+      missingFiles: Array.isArray(parsed.missingFiles) ? parsed.missingFiles : [],
       fileResults: Array.isArray(parsed.fileResults)
         ? parsed.fileResults.map((f: FileResult) => ({
             fileName: f.fileName || "Unknown File",
-            score: Math.min(100, Math.max(1, Number(f.score) || 50)),
-            feedback: f.feedback || "No specific feedback available.",
+            coveredFiles: Array.isArray(f.coveredFiles) ? f.coveredFiles : [],
+            score: Math.min(maxScore, Math.max(0, Number(f.score) || 0)),
+            feedback: f.feedback || "",
             strengths: Array.isArray(f.strengths) ? f.strengths : [],
             improvements: Array.isArray(f.improvements) ? f.improvements : [],
+            checklistResults: f.checklistResults && typeof f.checklistResults === "object"
+              ? f.checklistResults
+              : {},
           }))
         : [],
-      standardTitle: standard.title,
-      criterionTitle: criterion.title,
-      criterionCode: criterion.code,
+      recommendedAction: ["PASS", "MINOR_REVISION", "MAJOR_REVISION", "FAIL"].includes(parsed.recommendedAction)
+        ? parsed.recommendedAction
+        : "MAJOR_REVISION",
     };
 
     return result;
   } catch {
-    // If parsing fails, return a structured error response
-    throw new Error(
-      `Failed to parse AI response. Raw response: ${cleanedText}`
-    );
+    throw new Error(`Failed to parse AI response: ${cleanedText}`);
   }
 }

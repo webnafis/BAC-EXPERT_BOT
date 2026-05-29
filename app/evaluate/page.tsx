@@ -57,10 +57,9 @@ export default function EvaluatePage() {
         f.name.endsWith(".docx") ||
         f.name.endsWith(".doc")
     );
-    setUploadedFiles((prev) => {
-      const existing = new Set(prev.map((f) => f.name));
-      return [...prev, ...valid.filter((f) => !existing.has(f.name))];
-    });
+    if (valid.length > 0) {
+      setUploadedFiles([valid[0]]);  // ← only keep the first/latest file
+    }
   }, []);
 
   const handleAnalyze = async () => {
@@ -90,26 +89,36 @@ export default function EvaluatePage() {
     }
   };
 
-  const getScoreColor = (score: number) => {
-    if (score >= 90) return "#10b981";
-    if (score >= 75) return "#006A4E";
-    if (score >= 60) return "#A37210";
-    if (score >= 45) return "#f97316";
+  const getScoreColor = (score: number, max: number) => {
+    const pct = score / max;
+    if (pct >= 0.90) return "#10b981";
+    if (pct >= 0.75) return "#006A4E";
+    if (pct >= 0.65) return "#A37210";
+    if (pct >= 0.50) return "#f97316";
     return "#ef4444";
   };
 
-  const getScoreLabel = (score: number) => {
-    if (score >= 90) return "Exemplary";
-    if (score >= 75) return "Good";
-    if (score >= 60) return "Satisfactory";
-    if (score >= 45) return "Needs Improvement";
-    return "Insufficient";
-  };
-
+  // const getScoreLabel = (score: number) => {
+  //   if (score >= 90) return "Exemplary";
+  //   if (score >= 75) return "Good";
+  //   if (score >= 60) return "Satisfactory";
+  //   if (score >= 45) return "Needs Improvement";
+  //   return "Insufficient";
+  // };
+// Change score label helper to use maxPossibleScore:
+const getScoreLabel = (score: number, max: number) => {
+  const pct = score / max;
+  if (pct >= 0.90) return "Exemplary";
+  if (pct >= 0.75) return "Good";
+  if (pct >= 0.65) return "Adequate";
+  if (pct >= 0.50) return "Weak";
+  if (pct >= 0.35) return "Poor";
+  return "Critical";
+};
   const circumference = 2 * Math.PI * 45;
   const strokeDasharray = result
-    ? `${(result.overallScore / 100) * circumference} ${circumference}`
-    : "0 283";
+  ? `${(result.overallScore / result.maxPossibleScore) * circumference} ${circumference}`
+  : "0 283";
 
   const stepNumbers: Record<Step, number> = {
     standard: 1,
@@ -479,7 +488,7 @@ export default function EvaluatePage() {
                       >
                         Required files:
                       </span>
-                      {c.requiredFiles.slice(0, 3).map((f, i) => (
+                      {c.requiredFiles.map((f, i) => (
                         <span
                           key={i}
                           className="tag"
@@ -725,12 +734,11 @@ export default function EvaluatePage() {
                 Drop files here or click to browse
               </p>
               <p style={{ color: "var(--text-muted)", fontSize: "13px" }}>
-                Supports .docx and .pdf files
+              Supports .docx and .pdf — one file at a time
               </p>
               <input
                 ref={fileInputRef}
                 type="file"
-                multiple
                 accept=".pdf,.docx,.doc"
                 style={{ display: "none" }}
                 onChange={(e) => handleFileAdd(e.target.files)}
@@ -927,9 +935,8 @@ export default function EvaluatePage() {
                   style={{
                     padding: "40px",
                     marginBottom: "24px",
-                    background:
-                      "linear-gradient(135deg, rgba(0,106,78,0.06) 0%, rgba(0,149,108,0.03) 100%)",
-                    borderColor: `${getScoreColor(result.overallScore)}30`,
+                    background:"linear-gradient(135deg, rgba(0,106,78,0.06) 0%, rgba(0,149,108,0.03) 100%)",
+                    borderColor: `${getScoreColor(result.overallScore, result.maxPossibleScore)}30`,
                     display: "flex",
                     gap: "40px",
                     alignItems: "center",
@@ -952,7 +959,7 @@ export default function EvaluatePage() {
                         cy="50"
                         r="45"
                         fill="none"
-                        stroke={getScoreColor(result.overallScore)}
+                        stroke={getScoreColor(result.overallScore, result.maxPossibleScore)}
                         strokeWidth="8"
                         strokeLinecap="round"
                         strokeDasharray={strokeDasharray}
@@ -961,7 +968,7 @@ export default function EvaluatePage() {
                         className="score-ring"
                         style={{
                           filter: `drop-shadow(0 0 6px ${getScoreColor(
-                            result.overallScore
+                            result.overallScore, result.maxPossibleScore
                           )}60)`,
                         }}
                       />
@@ -969,12 +976,12 @@ export default function EvaluatePage() {
                         x="50"
                         y="48"
                         textAnchor="middle"
-                        fill={getScoreColor(result.overallScore)}
+                        fill={getScoreColor(result.overallScore, result.maxPossibleScore)}
                         fontSize="22"
                         fontWeight="bold"
                         fontFamily="Playfair Display"
                       >
-                        {result.overallScore}%
+                        {result.overallScore}/{result.maxPossibleScore}
                       </text>
                       <text
                         x="50"
@@ -1002,10 +1009,10 @@ export default function EvaluatePage() {
                         className="font-display"
                         style={{
                           fontSize: "28px",
-                          color: getScoreColor(result.overallScore),
+                          color: getScoreColor(result.overallScore, result.maxPossibleScore),
                         }}
                       >
-                        {getScoreLabel(result.overallScore)}
+                        {getScoreLabel(result.overallScore, result.maxPossibleScore)}
                       </span>
                     </div>
                     <p
@@ -1038,26 +1045,127 @@ export default function EvaluatePage() {
                         <span
                           style={{
                             fontSize: "12px",
-                            color: getScoreColor(result.overallScore),
+                            color: getScoreColor(result.overallScore, result.maxPossibleScore),
                           }}
                         >
-                          {result.overallScore}/100
+                          {result.overallScore}/{result.maxPossibleScore}
                         </span>
                       </div>
                       <div className="progress-bar">
                         <div
                           className="progress-fill"
                           style={{
-                            width: `${result.overallScore}%`,
+                            width:  `${(result.overallScore / result.maxPossibleScore) * 100}%`,
                             background: `linear-gradient(90deg, ${getScoreColor(
-                              result.overallScore
-                            )}, ${getScoreColor(result.overallScore)}aa)`,
+                              result.overallScore, result.maxPossibleScore
+                            )}, ${getScoreColor(result.overallScore, result.maxPossibleScore)}aa)`,
                           }}
                         />
                       </div>
                     </div>
                   </div>
                 </div>
+                {/* Recommended Action Banner */}
+{result.recommendedAction && (
+  <div
+    className="card"
+    style={{
+      padding: "20px 24px",
+      marginBottom: "24px",
+      display: "flex",
+      alignItems: "center",
+      gap: "16px",
+      borderColor: result.recommendedAction === "PASS"
+        ? "rgba(16,185,129,0.3)"
+        : result.recommendedAction === "MINOR_REVISION"
+        ? "rgba(163,114,16,0.3)"
+        : "rgba(239,68,68,0.3)",
+      background: result.recommendedAction === "PASS"
+        ? "rgba(16,185,129,0.05)"
+        : result.recommendedAction === "MINOR_REVISION"
+        ? "rgba(163,114,16,0.05)"
+        : "rgba(239,68,68,0.05)",
+    }}
+  >
+    <span style={{ fontSize: "28px" }}>
+      {result.recommendedAction === "PASS" ? "✅"
+        : result.recommendedAction === "MINOR_REVISION" ? "🔶"
+        : result.recommendedAction === "MAJOR_REVISION" ? "🔴"
+        : "❌"}
+    </span>
+    <div>
+      <p style={{ fontWeight: 700, fontSize: "16px",
+        color: result.recommendedAction === "PASS" ? "#34d399"
+          : result.recommendedAction === "MINOR_REVISION" ? "#A37210"
+          : "#f87171"
+      }}>
+        BAC Recommendation: {result.recommendedAction.replace(/_/g, " ")}
+      </p>
+      <p style={{ fontSize: "13px", color: "var(--text-secondary)", marginTop: "2px" }}>
+        {result.recommendedAction === "PASS"
+          ? "This criterion meets BAC requirements and is ready for submission."
+          : result.recommendedAction === "MINOR_REVISION"
+          ? "Small targeted improvements needed before formal BAC submission."
+          : result.recommendedAction === "MAJOR_REVISION"
+          ? "Significant gaps must be addressed — major revision required."
+          : "Submission does not meet BAC requirements. Rebuild recommended."}
+      </p>
+    </div>
+  </div>
+)}
+
+{/* Evaluation Summary Card */}
+// {result.evaluationSummary && (
+//   <div className="card" style={{ padding: "24px", marginBottom: "24px" }}>
+//     <h3 style={{ fontWeight: 600, marginBottom: "16px", fontSize: "15px" }}>
+//       📊 Evaluation Summary
+//     </h3>
+//     <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "16px" }}>
+//       {[
+//         { label: "Files Uploaded", value: result.evaluationSummary.filesUploaded },
+//         {
+//           label: "Evidence Covered",
+//           value: `${result.evaluationSummary.evidenceCoveredCount} / ${result.evaluationSummary.requiredEvidenceCount}`,
+//         },
+//         {
+//           label: "Document Type",
+//           value: result.evaluationSummary.consolidatedDocument ? "Consolidated" : "Separate Files",
+//         },
+//       ].map(({ label, value }) => (
+//         <div key={label} style={{
+//           padding: "16px",
+//           background: "rgba(0,0,0,0.02)",
+//           borderRadius: "10px",
+//           border: "1px solid var(--border)",
+//           textAlign: "center",
+//         }}>
+//           <p style={{ fontSize: "22px", fontWeight: 700, color: "var(--text-primary)" }}>{value}</p>
+//           <p style={{ fontSize: "12px", color: "var(--text-muted)", marginTop: "4px" }}>{label}</p>
+//         </div>
+//       ))}
+//     </div>
+//     {result.evaluationSummary.missingCriticalElements.length > 0 && (
+//       <div style={{ marginTop: "16px" }}>
+//         <p style={{ fontSize: "13px", fontWeight: 600, color: "#f87171", marginBottom: "8px" }}>
+//           Critical Missing Elements:
+//         </p>
+//         {result.evaluationSummary.missingCriticalElements.map((el:string, i:number) => (
+//           <div key={i} style={{
+//             padding: "8px 12px",
+//             background: "rgba(239,68,68,0.04)",
+//             borderRadius: "6px",
+//             fontSize: "12px",
+//             color: "var(--text-secondary)",
+//             marginBottom: "6px",
+//             border: "1px solid rgba(239,68,68,0.12)",
+//           }}>
+//             ✕ {el}
+//           </div>
+//         ))}
+//       </div>
+//     )}
+//   </div>
+// )}
 
                 {/* Missing Files Alert */}
                 {result.missingFiles.length > 0 && (
@@ -1133,14 +1241,14 @@ export default function EvaluatePage() {
                   </div>
                 )}
 
-                {/* Per-File Results */}
+                {/* File Results */}
                 {result.fileResults.length > 0 && (
                   <div>
                     <h2
                       className="font-display"
                       style={{ fontSize: "24px", marginBottom: "16px" }}
                     >
-                      Per-File Analysis
+                      File Analysis
                     </h2>
                     <div
                       style={{
@@ -1199,17 +1307,17 @@ export default function EvaluatePage() {
                                   height: "70px",
                                   borderRadius: "50%",
                                   background: `radial-gradient(circle, ${getScoreColor(
-                                    fr.score
+                                    fr.score, result.maxPossibleScore
                                   )}10, transparent)`,
                                   border: `3px solid ${getScoreColor(
-                                    fr.score
+                                    fr.score, result.maxPossibleScore
                                   )}`,
                                   display: "flex",
                                   alignItems: "center",
                                   justifyContent: "center",
                                   flexDirection: "column",
                                   boxShadow: `0 2px 12px ${getScoreColor(
-                                    fr.score
+                                    fr.score, result.maxPossibleScore
                                   )}25`,
                                 }}
                               >
@@ -1217,7 +1325,7 @@ export default function EvaluatePage() {
                                   className="font-display"
                                   style={{
                                     fontSize: "18px",
-                                    color: getScoreColor(fr.score),
+                                    color: getScoreColor(fr.score, result.maxPossibleScore),
                                   }}
                                 >
                                   {fr.score}
@@ -1228,17 +1336,17 @@ export default function EvaluatePage() {
                                     color: "var(--text-muted)",
                                   }}
                                 >
-                                  /100
+                                  /{result.maxPossibleScore}
                                 </span>
                               </div>
                               <div
                                 style={{
                                   marginTop: "6px",
                                   fontSize: "11px",
-                                  color: getScoreColor(fr.score),
+                                  color: getScoreColor(fr.score, result.maxPossibleScore),
                                 }}
                               >
-                                {getScoreLabel(fr.score)}
+                                {getScoreLabel(fr.score, result.maxPossibleScore)}
                               </div>
                             </div>
                           </div>
@@ -1250,13 +1358,58 @@ export default function EvaluatePage() {
                             <div
                               className="progress-fill"
                               style={{
-                                width: `${fr.score}%`,
+                                width: `${(fr.score / result.maxPossibleScore) * 100}%`,
                                 background: `linear-gradient(90deg, ${getScoreColor(
-                                  fr.score
-                                )}, ${getScoreColor(fr.score)}aa)`,
+                                  fr.score, result.maxPossibleScore
+                                )}, ${getScoreColor(fr.score, result.maxPossibleScore)}aa)`,
                               }}
                             />
                           </div>
+                          {/* Covers Requirements */}
+{fr.coveredFiles.length > 0 && (
+  <div style={{ marginBottom: "12px" }}>
+    <p style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "6px" }}>
+      Evidence covered by this file:
+    </p>
+    <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+      {fr.coveredFiles.map((req, j) => (
+        <span key={j} style={{
+          fontSize: "11px", padding: "3px 8px", borderRadius: "6px",
+          background: "rgba(16,185,129,0.08)", color: "#34d399",
+          border: "1px solid rgba(16,185,129,0.2)",
+        }}>
+          ✓ {req}
+        </span>
+      ))}
+    </div>
+  </div>
+)}
+
+{/* Checklist Results */}
+{fr.checklistResults && Object.keys(fr.checklistResults).length > 0 && (
+  <div style={{ marginBottom: "16px" }}>
+    <p style={{ fontSize: "12px", fontWeight: 600, color: "var(--text-secondary)", marginBottom: "8px" }}>
+      Criterion Checklist:
+    </p>
+    <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+      {Object.entries(fr.checklistResults).map(([key, met], j) => (
+        <div key={j} style={{
+          display: "flex", alignItems: "center", gap: "8px",
+          padding: "6px 10px", borderRadius: "6px",
+          background: met ? "rgba(16,185,129,0.05)" : "rgba(239,68,68,0.04)",
+          border: `1px solid ${met ? "rgba(16,185,129,0.15)" : "rgba(239,68,68,0.12)"}`,
+        }}>
+          <span style={{ color: met ? "#34d399" : "#f87171", fontSize: "12px" }}>
+            {met ? "✓" : "✕"}
+          </span>
+          <span style={{ fontSize: "12px", color: "var(--text-secondary)" }}>
+            {key}
+          </span>
+        </div>
+      ))}
+    </div>
+  </div>
+)}
 
                           <div
                             style={{

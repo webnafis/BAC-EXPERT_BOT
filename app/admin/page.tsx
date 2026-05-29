@@ -112,6 +112,7 @@ export default function AdminPage() {
     requiredFiles: "",
     guidelines: "",
     weight: 7,
+    checklistItems: "", 
   });
 
   const addCriterion = async () => {
@@ -124,6 +125,7 @@ export default function AdminPage() {
         type: "add_criterion",
         ...cForm,
         requiredFiles: cForm.requiredFiles.split("\n").filter(Boolean),
+        checklistItems: cForm.checklistItems.split("\n").filter(Boolean),
       }),
     });
     if (res.ok) {
@@ -136,6 +138,7 @@ export default function AdminPage() {
         requiredFiles: "",
         guidelines: "",
         weight: 7,
+        checklistItems: "",
       });
       fetchStandards();
     } else showMsg("Failed to add criterion", "error");
@@ -1012,8 +1015,58 @@ export default function AdminPage() {
             <div>
               <label style={labelStyle}>Description *</label>
               <textarea
-                rows={3}
-                placeholder="Describe what this standard covers..."
+                rows={10}
+                placeholder={`A good standard description should include 4 parts:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PART 1 — OFFICIAL BAC DEFINITION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Paste the exact BAC text for this standard from the 
+official BAC accreditation document.
+
+e.g. "Governance system must work in a manner that 
+ensures better management of the program towards the 
+achievement of mission and objectives of the HEI/POE 
+in a way that effectively benefits the stakeholders."
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PART 2 — PLAIN LANGUAGE TRANSLATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Explain what this standard means in practice.
+What is the department expected to demonstrate?
+What does "compliance" look like in real terms?
+
+e.g. "In practical terms, this standard asks: Does 
+the department have a clear direction, structured 
+plans, safe policies, and disciplined operations — 
+and are these documented, approved, and implemented?"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PART 3 — CRITERIA SUMMARY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+List ALL criteria under this standard with a 
+one-line description of what each criterion covers.
+
+e.g. "This standard covers 6 criteria:
+- Criterion 1.1: Vision & Mission — ...
+- Criterion 1.2: Strategic Plan — ...
+- Criterion 1.3: Sexual Harassment Policy — ...
+- Criterion 1.4: Academic Calendar — ...
+- Criterion 1.5: Class Size Policy — ...
+- Criterion 1.6: Student Database — ..."
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PART 4 — AI EVALUATION INSTRUCTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Tell the AI what overarching principle to apply 
+when evaluating ALL criteria under this standard.
+What is the common thread the AI must check for?
+
+e.g. "When evaluating documents under this standard, 
+assess whether evidence shows active implementation 
+and real operational impact — not just document 
+existence. The key principle is that governance must 
+effectively benefit stakeholders."`}
                 value={sForm.description}
                 onChange={(e) =>
                   setSForm((p) => ({ ...p, description: e.target.value }))
@@ -1076,7 +1129,7 @@ export default function AdminPage() {
             <div>
               <label style={labelStyle}>Description</label>
               <textarea
-                rows={3}
+                rows={10}
                 value={showEditStandard.description}
                 onChange={(e) =>
                   setShowEditStandard((p) =>
@@ -1139,11 +1192,10 @@ export default function AdminPage() {
                 />
               </div>
               <div>
-                <label style={labelStyle}>Weight (1-10) *</label>
+                <label style={labelStyle}>Weight *</label>
                 <input
                   type="number"
                   min={1}
-                  max={10}
                   value={cForm.weight}
                   onChange={(e) =>
                     setCForm((p) => ({ ...p, weight: Number(e.target.value) }))
@@ -1154,7 +1206,7 @@ export default function AdminPage() {
             <div>
               <label style={labelStyle}>Title *</label>
               <input
-                placeholder="Criterion title"
+                placeholder="Criterion title: e.g. Strategic Plan and Program Educational Objectives (PEOs)"
                 value={cForm.title}
                 onChange={(e) =>
                   setCForm((p) => ({ ...p, title: e.target.value }))
@@ -1164,8 +1216,18 @@ export default function AdminPage() {
             <div>
               <label style={labelStyle}>Description *</label>
               <textarea
-                rows={2}
-                placeholder="What does this criterion require?"
+                rows={10}
+                placeholder={`Describe what this criterion requires in full detail. Include:
+- What the PoE/department must have or demonstrate
+- Who the stakeholders are (faculty, industry, alumni, students)
+- What "evidence" means in this context (not just claims)
+- Any BAC-specific terminology or definitions
+- What differentiates a weak vs strong submission
+
+Example: "The Program of Engineering (PoE) must have a formally documented 
+Strategic Plan that establishes PEOs in alignment with the HEI vision/mission. 
+PEOs must describe graduate achievements within 3–5 years of graduation, 
+developed with stakeholder input, with a defined periodic review mechanism..."`}
                 value={cForm.description}
                 onChange={(e) =>
                   setCForm((p) => ({ ...p, description: e.target.value }))
@@ -1175,9 +1237,13 @@ export default function AdminPage() {
             <div>
               <label style={labelStyle}>Required Files (one per line) *</label>
               <textarea
-                rows={5}
+                rows={6}
                 placeholder={
-                  "Vision Statement Document\nMission Document\nApproval Minutes"
+                  `Strategic Plan Document (with goals, objectives, actions, timeline, budget, and achievement indicators)
+Minutes of Meeting — Strategic Plan Approval
+Stakeholder Input Collection Mechanism (survey form, feedback system, or equivalent)
+Minutes of Meeting — Stakeholder Input Consideration (faculty, staff, and others)
+Communication Link or Evidence showing how the Strategic Plan is communicated to stakeholders`
                 }
                 value={cForm.requiredFiles}
                 onChange={(e) =>
@@ -1185,11 +1251,44 @@ export default function AdminPage() {
                 }
               />
             </div>
+            {/* In Add Criterion modal — after requiredFiles textarea */}
+<div>
+  <label style={labelStyle}>Evaluation Checklist Items (one per line) *</label>
+  <textarea
+    rows={10}
+    placeholder={`One checkable item per line. These are the specific things the AI will verify.
+Be precise — each item should be a yes/no verifiable statement.
+
+Example for criterion 1.2:
+Strategic plan document exists as a formally structured standalone document
+Plan contains strategic goals aligned with HEI/POE vision and mission
+Plan contains specific objectives with measurable indicators (KPIs)
+Plan contains necessary actions with responsible persons identified
+Plan contains a specific implementation timeline with dates
+Plan contains budget allocation per goal or action
+Minutes of meeting for strategic plan approval are present
+A mechanism/system for collecting stakeholder input is documented
+Minutes showing stakeholder inputs were considered are present
+A communication link showing how the plan is communicated is provided`}
+    value={cForm.checklistItems}
+    onChange={(e) => setCForm((p) => ({ ...p, checklistItems: e.target.value }))}
+  />
+</div>
             <div>
               <label style={labelStyle}>Evaluation Guidelines</label>
               <textarea
-                rows={2}
-                placeholder="Key guidelines for evaluation..."
+                rows={10}
+                placeholder={`Provide specific, checkable rules the AI must apply. Include:
+- Minimum counts (e.g. "PEOs must be 3–5 in number")
+- Timeframes (e.g. "achievable within 3–5 years post-graduation")
+- What counts as evidence vs claim (e.g. "verbal approvals not acceptable")
+- Format requirements (e.g. "must include budget breakdown by category")
+- Red flags that should lower the score
+
+Example: "The strategic plan must include: (1) goals aligned with HEI mission, 
+(2) measurable objectives with KPIs, (3) responsible persons per action, 
+(4) implementation timeline, (5) budget allocation. Approval must be evidenced 
+by signed meeting minutes — informal approvals are not acceptable..."`}
                 value={cForm.guidelines}
                 onChange={(e) =>
                   setCForm((p) => ({ ...p, guidelines: e.target.value }))
@@ -1249,7 +1348,7 @@ export default function AdminPage() {
                 />
               </div>
               <div>
-                <label style={labelStyle}>Weight (1-10)</label>
+                <label style={labelStyle}>Weight</label>
                 <input
                   type="number"
                   min={1}
@@ -1277,7 +1376,7 @@ export default function AdminPage() {
             <div>
               <label style={labelStyle}>Description</label>
               <textarea
-                rows={2}
+                rows={10}
                 value={showEditCriterion.description}
                 onChange={(e) =>
                   setShowEditCriterion((p) =>
@@ -1289,7 +1388,7 @@ export default function AdminPage() {
             <div>
               <label style={labelStyle}>Required Files (one per line)</label>
               <textarea
-                rows={5}
+                rows={6}
                 value={showEditCriterion.requiredFiles.join("\n")}
                 onChange={(e) =>
                   setShowEditCriterion((p) =>
@@ -1306,9 +1405,21 @@ export default function AdminPage() {
               />
             </div>
             <div>
+  <label style={labelStyle}>Checklist Items (one per line)</label>
+  <textarea
+    rows={10}
+    value={(showEditCriterion.checklistItems || []).join("\n")}
+    onChange={(e) =>
+      setShowEditCriterion((p) =>
+        p ? { ...p, checklistItems: e.target.value.split("\n").filter(Boolean) } : null
+      )
+    }
+  />
+</div>
+            <div>
               <label style={labelStyle}>Guidelines</label>
               <textarea
-                rows={2}
+                rows={10}
                 value={showEditCriterion.guidelines}
                 onChange={(e) =>
                   setShowEditCriterion((p) =>
@@ -1371,7 +1482,14 @@ export default function AdminPage() {
             <div>
               <label style={labelStyle}>Description *</label>
               <input
-                placeholder="Brief description of this benchmark document"
+              rows={10}
+                placeholder={`What a Good description Should Do
+                The description field is what the AI reads to understand what this benchmark represents, what makes it strong, and what to look for when comparing the user's uploaded file against it. It should answer:
+                
+                1.What type of document is this?
+                2.What BAC checkpoints does it satisfy?
+                3.What specific strengths make it a good benchmark?
+                4.What should the AI use it to check against?`}
                 value={dForm.description}
                 onChange={(e) =>
                   setDForm((p) => ({ ...p, description: e.target.value }))
@@ -1410,7 +1528,7 @@ export default function AdminPage() {
             <div>
               <label style={labelStyle}>Document Content *</label>
               <textarea
-                rows={8}
+                rows={10}
                 placeholder="Upload a file above or paste text manually. This content is used by the AI for comparative scoring..."
                 value={dForm.content}
                 onChange={(e) =>
@@ -1485,6 +1603,7 @@ export default function AdminPage() {
             <div>
               <label style={labelStyle}>Description</label>
               <input
+              rows={10}
                 value={showEditDemo.description}
                 onChange={(e) =>
                   setShowEditDemo((p) =>
@@ -1529,7 +1648,7 @@ export default function AdminPage() {
             <div>
               <label style={labelStyle}>Content</label>
               <textarea
-                rows={8}
+                rows={10}
                 value={showEditDemo.content}
                 onChange={(e) =>
                   setShowEditDemo((p) =>
