@@ -1481,7 +1481,7 @@ by signed meeting minutes — informal approvals are not acceptable..."`}
             </div>
             <div>
               <label style={labelStyle}>Description *</label>
-              <input
+              <textarea
               rows={10}
                 placeholder={`What a Good description Should Do
                 The description field is what the AI reads to understand what this benchmark represents, what makes it strong, and what to look for when comparing the user's uploaded file against it. It should answer:
@@ -1602,7 +1602,7 @@ by signed meeting minutes — informal approvals are not acceptable..."`}
             </div>
             <div>
               <label style={labelStyle}>Description</label>
-              <input
+              <textarea
               rows={10}
                 value={showEditDemo.description}
                 onChange={(e) =>

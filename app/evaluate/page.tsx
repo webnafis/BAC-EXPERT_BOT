@@ -1115,57 +1115,57 @@ const getScoreLabel = (score: number, max: number) => {
 )}
 
 {/* Evaluation Summary Card */}
-// {result.evaluationSummary && (
-//   <div className="card" style={{ padding: "24px", marginBottom: "24px" }}>
-//     <h3 style={{ fontWeight: 600, marginBottom: "16px", fontSize: "15px" }}>
-//       📊 Evaluation Summary
-//     </h3>
-//     <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "16px" }}>
-//       {[
-//         { label: "Files Uploaded", value: result.evaluationSummary.filesUploaded },
-//         {
-//           label: "Evidence Covered",
-//           value: `${result.evaluationSummary.evidenceCoveredCount} / ${result.evaluationSummary.requiredEvidenceCount}`,
-//         },
-//         {
-//           label: "Document Type",
-//           value: result.evaluationSummary.consolidatedDocument ? "Consolidated" : "Separate Files",
-//         },
-//       ].map(({ label, value }) => (
-//         <div key={label} style={{
-//           padding: "16px",
-//           background: "rgba(0,0,0,0.02)",
-//           borderRadius: "10px",
-//           border: "1px solid var(--border)",
-//           textAlign: "center",
-//         }}>
-//           <p style={{ fontSize: "22px", fontWeight: 700, color: "var(--text-primary)" }}>{value}</p>
-//           <p style={{ fontSize: "12px", color: "var(--text-muted)", marginTop: "4px" }}>{label}</p>
-//         </div>
-//       ))}
-//     </div>
-//     {result.evaluationSummary.missingCriticalElements.length > 0 && (
-//       <div style={{ marginTop: "16px" }}>
-//         <p style={{ fontSize: "13px", fontWeight: 600, color: "#f87171", marginBottom: "8px" }}>
-//           Critical Missing Elements:
-//         </p>
-//         {result.evaluationSummary.missingCriticalElements.map((el:string, i:number) => (
-//           <div key={i} style={{
-//             padding: "8px 12px",
-//             background: "rgba(239,68,68,0.04)",
-//             borderRadius: "6px",
-//             fontSize: "12px",
-//             color: "var(--text-secondary)",
-//             marginBottom: "6px",
-//             border: "1px solid rgba(239,68,68,0.12)",
-//           }}>
-//             ✕ {el}
-//           </div>
-//         ))}
-//       </div>
-//     )}
-//   </div>
-// )}
+{/* {result.evaluationSummary && (
+  <div className="card" style={{ padding: "24px", marginBottom: "24px" }}>
+    <h3 style={{ fontWeight: 600, marginBottom: "16px", fontSize: "15px" }}>
+      📊 Evaluation Summary
+    </h3>
+    <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "16px" }}>
+      {[
+        { label: "Files Uploaded", value: result.evaluationSummary.filesUploaded },
+        {
+          label: "Evidence Covered",
+          value: `${result.evaluationSummary.evidenceCoveredCount} / ${result.evaluationSummary.requiredEvidenceCount}`,
+        },
+        {
+          label: "Document Type",
+          value: result.evaluationSummary.consolidatedDocument ? "Consolidated" : "Separate Files",
+        },
+      ].map(({ label, value }) => (
+        <div key={label} style={{
+          padding: "16px",
+          background: "rgba(0,0,0,0.02)",
+          borderRadius: "10px",
+          border: "1px solid var(--border)",
+          textAlign: "center",
+        }}>
+          <p style={{ fontSize: "22px", fontWeight: 700, color: "var(--text-primary)" }}>{value}</p>
+          <p style={{ fontSize: "12px", color: "var(--text-muted)", marginTop: "4px" }}>{label}</p>
+        </div>
+      ))}
+    </div>
+    {result.evaluationSummary.missingCriticalElements.length > 0 && (
+      <div style={{ marginTop: "16px" }}>
+        <p style={{ fontSize: "13px", fontWeight: 600, color: "#f87171", marginBottom: "8px" }}>
+          Critical Missing Elements:
+        </p>
+        {result.evaluationSummary.missingCriticalElements.map((el:string, i:number) => (
+          <div key={i} style={{
+            padding: "8px 12px",
+            background: "rgba(239,68,68,0.04)",
+            borderRadius: "6px",
+            fontSize: "12px",
+            color: "var(--text-secondary)",
+            marginBottom: "6px",
+            border: "1px solid rgba(239,68,68,0.12)",
+          }}>
+            ✕ {el}
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+)} */}
 
                 {/* Missing Files Alert */}
                 {result.missingFiles.length > 0 && (
