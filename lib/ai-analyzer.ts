@@ -291,7 +291,7 @@ console.log(prompt);
         { role: "user", content: prompt },
       ],
       stream: false,
-      options: { temperature: 0, top_p: 1, top_k: 1, seed: 42, repeat_penalty: 1.0,},
+      options: { temperature: 0.2, top_p: 0.9, top_k: 1, seed: 42, repeat_penalty: 1.0,},
     }),
   });
 
