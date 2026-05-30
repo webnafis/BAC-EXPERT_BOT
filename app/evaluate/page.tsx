@@ -503,7 +503,7 @@ const getScoreLabel = (score: number, max: number) => {
                           {f}
                         </span>
                       ))}
-                      {c.requiredFiles.length > 3 && (
+                      {/* {c.requiredFiles.length > 3 && (
                         <span
                           style={{
                             fontSize: "12px",
@@ -512,7 +512,7 @@ const getScoreLabel = (score: number, max: number) => {
                         >
                           +{c.requiredFiles.length - 3} more
                         </span>
-                      )}
+                      )} */}
                     </div>
                   </div>
                   <span
