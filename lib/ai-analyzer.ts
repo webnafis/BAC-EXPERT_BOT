@@ -276,7 +276,7 @@ export async function analyzeWithAI(
   demoFileContents: string[]
 ): Promise<AnalysisResult> {
   const prompt = buildBACScoringPrompt(standard, criterion, uploadedFiles, demoFileContents);
-
+console.log(prompt);
   const response = await fetch(`${AI_BASE_URL}/api/chat`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
