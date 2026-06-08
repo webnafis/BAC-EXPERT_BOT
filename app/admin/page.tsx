@@ -512,15 +512,15 @@ export default function AdminPage() {
                       </span>
                       <span style={{ fontWeight: 600 }}>{s.title}</span>
                     </div>
-                    <p
+                    <div
+                      className="standard-html"
                       style={{
                         color: "var(--text-secondary)",
                         fontSize: "13px",
                         lineHeight: 1.5,
                       }}
-                    >
-                      {s.description}...
-                    </p>
+                      dangerouslySetInnerHTML={{ __html: s.descriptionHtml || (s.description + "...") }}
+                    />
                     <div
                       style={{ marginTop: "8px", display: "flex", gap: "8px" }}
                     >
@@ -716,61 +716,95 @@ export default function AdminPage() {
                               Weight: {c.weight}
                             </span>
                           </div>
-                          <p
+                          <div
+                            className="standard-html"
                             style={{
                               color: "var(--text-secondary)",
                               fontSize: "13px",
                               marginBottom: "10px",
                             }}
+                            dangerouslySetInnerHTML={{ __html: c.descriptionHtml || c.description }}
+                          />
+                          <div
+                            style={{
+                              marginTop: "12px",
+                              padding: "12px 16px",
+                              background: "var(--green-50)",
+                              border: "1px solid rgba(0,106,78,0.1)",
+                              borderRadius: "10px",
+                            }}
                           >
-                            {c.description}
-                          </p>
-                          <div>
-                            <p
-                              style={{
-                                fontSize: "12px",
-                                color: "var(--text-muted)",
-                                marginBottom: "6px",
-                              }}
-                            >
-                              Required Files ({c.requiredFiles.length}):
-                            </p>
                             <div
                               style={{
+                                fontSize: "12px",
+                                fontWeight: 600,
+                                color: "var(--green-800)",
+                                marginBottom: "8px",
                                 display: "flex",
-                                flexWrap: "wrap",
+                                alignItems: "center",
+                                gap: "6px",
+                              }}
+                            >
+                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                              Required Evidence Documents ({c.requiredFiles.length})
+                            </div>
+                            <ul
+                              style={{
+                                listStyle: "none",
+                                padding: 0,
+                                margin: 0,
+                                display: "flex",
+                                flexDirection: "column",
                                 gap: "6px",
                               }}
                             >
                               {c.requiredFiles.map((f, i) => (
-                                <span
+                                <li
                                   key={i}
-                                  className="tag"
                                   style={{
-                                    fontSize: "11px",
-                                    background: "rgba(0,0,0,0.03)",
-                                    border: "1px solid var(--border)",
+                                    fontSize: "12px",
                                     color: "var(--text-secondary)",
-                                    padding: "3px 8px",
+                                    display: "flex",
+                                    alignItems: "flex-start",
+                                    gap: "8px",
+                                    lineHeight: 1.4,
                                   }}
                                 >
-                                  {f}
-                                </span>
+                                  <span style={{ color: "var(--green-700)", marginTop: "-1px" }}>•</span>
+                                  <span>{f}</span>
+                                </li>
                               ))}
-                            </div>
+                            </ul>
                           </div>
-                          {c.guidelines && (
+                          {(c.guidelinesHtml || c.guidelines) && (
                             <div
                               style={{
-                                marginTop: "10px",
-                                padding: "10px 12px",
+                                marginTop: "16px",
+                                padding: "16px",
                                 background: "rgba(0,106,78,0.05)",
-                                borderRadius: "8px",
-                                fontSize: "12px",
-                                color: "var(--text-secondary)",
+                                borderRadius: "10px",
+                                border: "1px solid rgba(0,106,78,0.10)",
                               }}
                             >
-                              📌 {c.guidelines}
+                              <div
+                                style={{
+                                  fontSize: "12px",
+                                  fontWeight: 600,
+                                  color: "#006A4E",
+                                  marginBottom: "12px",
+                                }}
+                              >
+                                📌 Evaluation Guidelines:
+                              </div>
+                              <div
+                                className="standard-html"
+                                style={{
+                                  fontSize: "12px",
+                                  color: "var(--text-secondary)",
+                                  lineHeight: 1.6,
+                                }}
+                                dangerouslySetInnerHTML={{ __html: c.guidelinesHtml || c.guidelines }}
+                              />
                             </div>
                           )}
                         </div>
