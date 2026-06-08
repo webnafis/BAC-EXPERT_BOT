@@ -58,7 +58,7 @@ export default function EvaluatePage() {
         f.name.endsWith(".doc")
     );
     if (valid.length > 0) {
-      setUploadedFiles([valid[0]]);  // ← only keep the first/latest file
+      setUploadedFiles([valid[0]]); // ← only keep the first/latest file
     }
   }, []);
 
@@ -91,10 +91,10 @@ export default function EvaluatePage() {
 
   const getScoreColor = (score: number, max: number) => {
     const pct = score / max;
-    if (pct >= 0.90) return "#10b981";
+    if (pct >= 0.9) return "#10b981";
     if (pct >= 0.75) return "#006A4E";
     if (pct >= 0.65) return "#A37210";
-    if (pct >= 0.50) return "#f97316";
+    if (pct >= 0.5) return "#f97316";
     return "#ef4444";
   };
 
@@ -105,20 +105,22 @@ export default function EvaluatePage() {
   //   if (score >= 45) return "Needs Improvement";
   //   return "Insufficient";
   // };
-// Change score label helper to use maxPossibleScore:
-const getScoreLabel = (score: number, max: number) => {
-  const pct = score / max;
-  if (pct >= 0.90) return "Exemplary";
-  if (pct >= 0.75) return "Good";
-  if (pct >= 0.65) return "Adequate";
-  if (pct >= 0.50) return "Weak";
-  if (pct >= 0.35) return "Poor";
-  return "Critical";
-};
+  // Change score label helper to use maxPossibleScore:
+  const getScoreLabel = (score: number, max: number) => {
+    const pct = score / max;
+    if (pct >= 0.9) return "Exemplary";
+    if (pct >= 0.75) return "Good";
+    if (pct >= 0.65) return "Adequate";
+    if (pct >= 0.5) return "Weak";
+    if (pct >= 0.35) return "Poor";
+    return "Critical";
+  };
   const circumference = 2 * Math.PI * 45;
   const strokeDasharray = result
-  ? `${(result.overallScore / result.maxPossibleScore) * circumference} ${circumference}`
-  : "0 283";
+    ? `${
+        (result.overallScore / result.maxPossibleScore) * circumference
+      } ${circumference}`
+    : "0 283";
 
   const stepNumbers: Record<Step, number> = {
     standard: 1,
@@ -270,103 +272,106 @@ const getScoreLabel = (score: number, max: number) => {
               </p>
             </div>
             {loadingStandards ? (
-              <Loader
-                message="Loading BAC standards…"
-                minHeight="320px"
-              />
+              <Loader message="Loading BAC standards…" minHeight="320px" />
             ) : (
-            <div
-              style={{ display: "flex", flexDirection: "column", gap: "12px" }}
-            >
-              {standards.map((std) => (
-                <button
-                  key={std.id}
-                  onClick={() => {
-                    setSelectedStandard(std);
-                    setSelectedCriterion(null);
-                    setStep("criterion");
-                  }}
-                  style={{
-                    width: "100%",
-                    textAlign: "left",
-                    padding: "20px 24px",
-                    background: "#FFFFFF",
-                    border: "1px solid var(--border)",
-                    borderRadius: "14px",
-                    cursor: "pointer",
-                    transition: "all 0.3s ease",
-                    color: "var(--text-primary)",
-                    fontFamily: "Plus Jakarta Sans",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    gap: "16px",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = "rgba(0,106,78,0.35)";
-                    e.currentTarget.style.transform = "translateY(-2px)";
-                    e.currentTarget.style.boxShadow =
-                      "0 4px 20px rgba(0,106,78,0.10)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = "var(--border)";
-                    e.currentTarget.style.transform = "translateY(0)";
-                    e.currentTarget.style.boxShadow = "none";
-                  }}
-                >
-                  <div style={{ flex: 1 }}>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "10px",
-                        marginBottom: "6px",
-                      }}
-                    >
-                      <span
-                        className="tag tag-blue"
-                        style={{ fontSize: "11px" }}
-                      >
-                        {std.code}
-                      </span>
-                      <span style={{ fontWeight: 600, fontSize: "16px" }}>
-                        {std.title}
-                      </span>
-                    </div>
-                    <div
-                      className="standard-html"
-                      style={{
-                        color: "var(--text-secondary)",
-                        fontSize: "13px",
-                        lineHeight: 1.5,
-                      }}
-                      dangerouslySetInnerHTML={{ __html: std.descriptionHtml || std.description }}
-                    />
-                    <div style={{ marginTop: "8px" }}>
-                      <span
-                        className="tag tag-purple"
-                        style={{ fontSize: "11px" }}
-                      >
-                        {std.criteria.length} criteria
-                      </span>
-                      {std.demoFiles.length > 0 && (
-                        <span
-                          className="tag tag-green"
-                          style={{ fontSize: "11px", marginLeft: "6px" }}
-                        >
-                          {std.demoFiles.length} demo files
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                  <span
-                    style={{ color: "var(--text-muted)", fontSize: "20px" }}
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "12px",
+                }}
+              >
+                {standards.map((std) => (
+                  <button
+                    key={std.id}
+                    onClick={() => {
+                      setSelectedStandard(std);
+                      setSelectedCriterion(null);
+                      setStep("criterion");
+                    }}
+                    style={{
+                      width: "100%",
+                      textAlign: "left",
+                      padding: "20px 24px",
+                      background: "#FFFFFF",
+                      border: "1px solid var(--border)",
+                      borderRadius: "14px",
+                      cursor: "pointer",
+                      transition: "all 0.3s ease",
+                      color: "var(--text-primary)",
+                      fontFamily: "Plus Jakarta Sans",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      gap: "16px",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = "rgba(0,106,78,0.35)";
+                      e.currentTarget.style.transform = "translateY(-2px)";
+                      e.currentTarget.style.boxShadow =
+                        "0 4px 20px rgba(0,106,78,0.10)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = "var(--border)";
+                      e.currentTarget.style.transform = "translateY(0)";
+                      e.currentTarget.style.boxShadow = "none";
+                    }}
                   >
-                    →
-                  </span>
-                </button>
-              ))}
-            </div>
+                    <div style={{ flex: 1 }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "10px",
+                          marginBottom: "6px",
+                        }}
+                      >
+                        <span
+                          className="tag tag-blue"
+                          style={{ fontSize: "11px" }}
+                        >
+                          {std.code}
+                        </span>
+                        <span style={{ fontWeight: 600, fontSize: "16px" }}>
+                          {std.title}
+                        </span>
+                      </div>
+                      <div
+                        className="standard-html"
+                        style={{
+                          color: "var(--text-secondary)",
+                          fontSize: "13px",
+                          lineHeight: 1.5,
+                        }}
+                        dangerouslySetInnerHTML={{
+                          __html: std.descriptionHtml || std.description,
+                        }}
+                      />
+                      <div style={{ marginTop: "8px" }}>
+                        <span
+                          className="tag tag-purple"
+                          style={{ fontSize: "11px" }}
+                        >
+                          {std.criteria.length} criteria
+                        </span>
+                        {std.demoFiles.length > 0 && (
+                          <span
+                            className="tag tag-green"
+                            style={{ fontSize: "11px", marginLeft: "6px" }}
+                          >
+                            {std.demoFiles.length} demo files
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    <span
+                      style={{ color: "var(--text-muted)", fontSize: "20px" }}
+                    >
+                      →
+                    </span>
+                  </button>
+                ))}
+              </div>
             )}
           </div>
         )}
@@ -413,137 +418,165 @@ const getScoreLabel = (score: number, max: number) => {
             {loadingStandards ? (
               <Loader message="Loading criteria…" minHeight="320px" />
             ) : (
-            <div
-              style={{ display: "flex", flexDirection: "column", gap: "12px" }}
-            >
-              {selectedStandard.criteria.map((c) => (
-                <button
-                  key={c.id}
-                  onClick={() => {
-                    setSelectedCriterion(c);
-                    setStep("upload");
-                  }}
-                  style={{
-                    width: "100%",
-                    textAlign: "left",
-                    padding: "20px 24px",
-                    background: "#FFFFFF",
-                    border: "1px solid var(--border)",
-                    borderRadius: "14px",
-                    cursor: "pointer",
-                    transition: "all 0.3s ease",
-                    color: "var(--text-primary)",
-                    fontFamily: "Plus Jakarta Sans",
-                    display: "flex",
-                    alignItems: "flex-start",
-                    justifyContent: "space-between",
-                    gap: "16px",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = "rgba(0,106,78,0.35)";
-                    e.currentTarget.style.transform = "translateY(-2px)";
-                    e.currentTarget.style.boxShadow =
-                      "0 4px 20px rgba(0,106,78,0.10)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = "var(--border)";
-                    e.currentTarget.style.transform = "translateY(0)";
-                    e.currentTarget.style.boxShadow = "none";
-                  }}
-                >
-                  <div style={{ flex: 1 }}>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "10px",
-                        marginBottom: "8px",
-                      }}
-                    >
-                      <span
-                        className="tag tag-amber"
-                        style={{ fontSize: "11px" }}
-                      >
-                        Criterion {c.code}
-                      </span>
-                      <span style={{ fontWeight: 600, fontSize: "15px" }}>
-                        {c.title}
-                      </span>
-                    </div>
-                    <div
-                      className="standard-html"
-                      style={{
-                        color: "var(--text-secondary)",
-                        fontSize: "13px",
-                        lineHeight: 1.5,
-                        marginBottom: "10px",
-                      }}
-                      dangerouslySetInnerHTML={{ __html: c.descriptionHtml || c.description }}
-                    />
-                    <div
-                      style={{
-                        marginTop: "12px",
-                        padding: "12px 16px",
-                        background: "var(--green-50)",
-                        border: "1px solid rgba(0,106,78,0.1)",
-                        borderRadius: "10px",
-                      }}
-                    >
-                      <div
-                        style={{
-                          fontSize: "12px",
-                          fontWeight: 600,
-                          color: "var(--green-800)",
-                          marginBottom: "8px",
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "6px",
-                        }}
-                      >
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                        Required Evidence Documents
-                      </div>
-                      <ul
-                        style={{
-                          listStyle: "none",
-                          padding: 0,
-                          margin: 0,
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: "6px",
-                        }}
-                      >
-                        {c.requiredFiles.map((f, i) => (
-                          <li
-                            key={i}
-                            style={{
-                              fontSize: "12px",
-                              color: "var(--text-secondary)",
-                              display: "flex",
-                              alignItems: "flex-start",
-                              gap: "8px",
-                              lineHeight: 1.4,
-                            }}
-                          >
-                            <span style={{ color: "var(--green-700)", marginTop: "-1px" }}>•</span>
-                            <span>{f}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                  <span
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "12px",
+                }}
+              >
+                {selectedStandard.criteria.map((c) => (
+                  <button
+                    key={c.id}
+                    onClick={() => {
+                      setSelectedCriterion(c);
+                      setStep("upload");
+                    }}
                     style={{
-                      color: "var(--text-muted)",
-                      fontSize: "20px",
-                      flexShrink: 0,
+                      width: "100%",
+                      textAlign: "left",
+                      padding: "20px 24px",
+                      background: "#FFFFFF",
+                      border: "1px solid var(--border)",
+                      borderRadius: "14px",
+                      cursor: "pointer",
+                      transition: "all 0.3s ease",
+                      color: "var(--text-primary)",
+                      fontFamily: "Plus Jakarta Sans",
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "16px",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = "rgba(0,106,78,0.35)";
+                      e.currentTarget.style.transform = "translateY(-2px)";
+                      e.currentTarget.style.boxShadow =
+                        "0 4px 20px rgba(0,106,78,0.10)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = "var(--border)";
+                      e.currentTarget.style.transform = "translateY(0)";
+                      e.currentTarget.style.boxShadow = "none";
                     }}
                   >
-                    →
-                  </span>
-                </button>
-              ))}
-            </div>
+                    <div style={{ flex: 1 }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "10px",
+                          marginBottom: "8px",
+                        }}
+                      >
+                        <span
+                          className="tag tag-amber"
+                          style={{ fontSize: "11px" }}
+                        >
+                          Criterion {c.code}
+                        </span>
+                        <span style={{ fontWeight: 600, fontSize: "15px" }}>
+                          {c.title}
+                        </span>
+                      </div>
+                      <div
+                        className="standard-html"
+                        style={{
+                          color: "var(--text-secondary)",
+                          fontSize: "13px",
+                          lineHeight: 1.5,
+                          marginBottom: "10px",
+                        }}
+                        dangerouslySetInnerHTML={{
+                          __html: c.descriptionHtml || c.description,
+                        }}
+                      />
+                      <div
+                        style={{
+                          marginTop: "12px",
+                          padding: "12px 16px",
+                          background: "var(--green-50)",
+                          border: "1px solid rgba(0,106,78,0.1)",
+                          borderRadius: "10px",
+                        }}
+                      >
+                        <div
+                          style={{
+                            fontSize: "12px",
+                            fontWeight: 600,
+                            color: "var(--green-800)",
+                            marginBottom: "8px",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "6px",
+                          }}
+                        >
+                          <svg
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                          </svg>
+                          Required Evidence Documents
+                        </div>
+                        <ul
+                          style={{
+                            listStyle: "none",
+                            padding: 0,
+                            margin: 0,
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: "6px",
+                          }}
+                        >
+                          {c.requiredFiles.map((f, i) => (
+                            <li
+                              key={i}
+                              style={{
+                                fontSize: "12px",
+                                color: "var(--text-secondary)",
+                                display: "flex",
+                                alignItems: "flex-start",
+                                gap: "8px",
+                                lineHeight: 1.4,
+                              }}
+                            >
+                              <span
+                                style={{
+                                  color: "var(--green-700)",
+                                  marginTop: "-1px",
+                                }}
+                              >
+                                •
+                              </span>
+                              <span>{f}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        color: "var(--text-muted)",
+                        fontSize: "20px",
+                        flexShrink: 0,
+                      }}
+                    >
+                      →
+                    </span>
+                  </button>
+                ))}
+              </div>
             )}
           </div>
         )}
@@ -693,7 +726,11 @@ const getScoreLabel = (score: number, max: number) => {
                     color: "var(--text-secondary)",
                     lineHeight: 1.6,
                   }}
-                  dangerouslySetInnerHTML={{ __html: selectedCriterion.guidelinesHtml || selectedCriterion.guidelines }}
+                  dangerouslySetInnerHTML={{
+                    __html:
+                      selectedCriterion.guidelinesHtml ||
+                      selectedCriterion.guidelines,
+                  }}
                 />
               </div>
             </div>
@@ -758,7 +795,7 @@ const getScoreLabel = (score: number, max: number) => {
                 Drop files here or click to browse
               </p>
               <p style={{ color: "var(--text-muted)", fontSize: "13px" }}>
-              Supports .docx and .pdf — one file at a time
+                Supports .docx and .pdf — one file at a time
               </p>
               <input
                 ref={fileInputRef}
@@ -959,8 +996,12 @@ const getScoreLabel = (score: number, max: number) => {
                   style={{
                     padding: "40px",
                     marginBottom: "24px",
-                    background:"linear-gradient(135deg, rgba(0,106,78,0.06) 0%, rgba(0,149,108,0.03) 100%)",
-                    borderColor: `${getScoreColor(result.overallScore, result.maxPossibleScore)}30`,
+                    background:
+                      "linear-gradient(135deg, rgba(0,106,78,0.06) 0%, rgba(0,149,108,0.03) 100%)",
+                    borderColor: `${getScoreColor(
+                      result.overallScore,
+                      result.maxPossibleScore
+                    )}30`,
                     display: "flex",
                     gap: "40px",
                     alignItems: "center",
@@ -983,7 +1024,10 @@ const getScoreLabel = (score: number, max: number) => {
                         cy="50"
                         r="45"
                         fill="none"
-                        stroke={getScoreColor(result.overallScore, result.maxPossibleScore)}
+                        stroke={getScoreColor(
+                          result.overallScore,
+                          result.maxPossibleScore
+                        )}
                         strokeWidth="8"
                         strokeLinecap="round"
                         strokeDasharray={strokeDasharray}
@@ -992,7 +1036,8 @@ const getScoreLabel = (score: number, max: number) => {
                         className="score-ring"
                         style={{
                           filter: `drop-shadow(0 0 6px ${getScoreColor(
-                            result.overallScore, result.maxPossibleScore
+                            result.overallScore,
+                            result.maxPossibleScore
                           )}60)`,
                         }}
                       />
@@ -1000,7 +1045,10 @@ const getScoreLabel = (score: number, max: number) => {
                         x="50"
                         y="48"
                         textAnchor="middle"
-                        fill={getScoreColor(result.overallScore, result.maxPossibleScore)}
+                        fill={getScoreColor(
+                          result.overallScore,
+                          result.maxPossibleScore
+                        )}
                         fontSize="22"
                         fontWeight="bold"
                         fontFamily="Playfair Display"
@@ -1033,10 +1081,16 @@ const getScoreLabel = (score: number, max: number) => {
                         className="font-display"
                         style={{
                           fontSize: "28px",
-                          color: getScoreColor(result.overallScore, result.maxPossibleScore),
+                          color: getScoreColor(
+                            result.overallScore,
+                            result.maxPossibleScore
+                          ),
                         }}
                       >
-                        {getScoreLabel(result.overallScore, result.maxPossibleScore)}
+                        {getScoreLabel(
+                          result.overallScore,
+                          result.maxPossibleScore
+                        )}
                       </span>
                     </div>
                     <p
@@ -1044,6 +1098,7 @@ const getScoreLabel = (score: number, max: number) => {
                         color: "var(--text-secondary)",
                         lineHeight: 1.7,
                         fontSize: "15px",
+                        textAlign: "justify",
                       }}
                     >
                       {result.overallFeedback}
@@ -1069,7 +1124,10 @@ const getScoreLabel = (score: number, max: number) => {
                         <span
                           style={{
                             fontSize: "12px",
-                            color: getScoreColor(result.overallScore, result.maxPossibleScore),
+                            color: getScoreColor(
+                              result.overallScore,
+                              result.maxPossibleScore
+                            ),
                           }}
                         >
                           {result.overallScore}/{result.maxPossibleScore}
@@ -1079,10 +1137,17 @@ const getScoreLabel = (score: number, max: number) => {
                         <div
                           className="progress-fill"
                           style={{
-                            width:  `${(result.overallScore / result.maxPossibleScore) * 100}%`,
+                            width: `${
+                              (result.overallScore / result.maxPossibleScore) *
+                              100
+                            }%`,
                             background: `linear-gradient(90deg, ${getScoreColor(
-                              result.overallScore, result.maxPossibleScore
-                            )}, ${getScoreColor(result.overallScore, result.maxPossibleScore)}aa)`,
+                              result.overallScore,
+                              result.maxPossibleScore
+                            )}, ${getScoreColor(
+                              result.overallScore,
+                              result.maxPossibleScore
+                            )}aa)`,
                           }}
                         />
                       </div>
@@ -1090,56 +1155,75 @@ const getScoreLabel = (score: number, max: number) => {
                   </div>
                 </div>
                 {/* Recommended Action Banner */}
-{result.recommendedAction && (
-  <div
-    className="card"
-    style={{
-      padding: "20px 24px",
-      marginBottom: "24px",
-      display: "flex",
-      alignItems: "center",
-      gap: "16px",
-      borderColor: result.recommendedAction === "PASS"
-        ? "rgba(16,185,129,0.3)"
-        : result.recommendedAction === "MINOR_REVISION"
-        ? "rgba(163,114,16,0.3)"
-        : "rgba(239,68,68,0.3)",
-      background: result.recommendedAction === "PASS"
-        ? "rgba(16,185,129,0.05)"
-        : result.recommendedAction === "MINOR_REVISION"
-        ? "rgba(163,114,16,0.05)"
-        : "rgba(239,68,68,0.05)",
-    }}
-  >
-    <span style={{ fontSize: "28px" }}>
-      {result.recommendedAction === "PASS" ? "✅"
-        : result.recommendedAction === "MINOR_REVISION" ? "🔶"
-        : result.recommendedAction === "MAJOR_REVISION" ? "🔴"
-        : "❌"}
-    </span>
-    <div>
-      <p style={{ fontWeight: 700, fontSize: "16px",
-        color: result.recommendedAction === "PASS" ? "#34d399"
-          : result.recommendedAction === "MINOR_REVISION" ? "#A37210"
-          : "#f87171"
-      }}>
-        BAC Recommendation: {result.recommendedAction.replace(/_/g, " ")}
-      </p>
-      <p style={{ fontSize: "13px", color: "var(--text-secondary)", marginTop: "2px" }}>
-        {result.recommendedAction === "PASS"
-          ? "This criterion meets BAC requirements and is ready for submission."
-          : result.recommendedAction === "MINOR_REVISION"
-          ? "Small targeted improvements needed before formal BAC submission."
-          : result.recommendedAction === "MAJOR_REVISION"
-          ? "Significant gaps must be addressed — major revision required."
-          : "Submission does not meet BAC requirements. Rebuild recommended."}
-      </p>
-    </div>
-  </div>
-)}
+                {result.recommendedAction && (
+                  <div
+                    className="card"
+                    style={{
+                      padding: "20px 24px",
+                      marginBottom: "24px",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "16px",
+                      borderColor:
+                        result.recommendedAction === "PASS"
+                          ? "rgba(16,185,129,0.3)"
+                          : result.recommendedAction === "MINOR_REVISION"
+                          ? "rgba(163,114,16,0.3)"
+                          : "rgba(239,68,68,0.3)",
+                      background:
+                        result.recommendedAction === "PASS"
+                          ? "rgba(16,185,129,0.05)"
+                          : result.recommendedAction === "MINOR_REVISION"
+                          ? "rgba(163,114,16,0.05)"
+                          : "rgba(239,68,68,0.05)",
+                    }}
+                  >
+                    <span style={{ fontSize: "28px" }}>
+                      {result.recommendedAction === "PASS"
+                        ? "✅"
+                        : result.recommendedAction === "MINOR_REVISION"
+                        ? "🔶"
+                        : result.recommendedAction === "MAJOR_REVISION"
+                        ? "🔴"
+                        : "❌"}
+                    </span>
+                    <div>
+                      <p
+                        style={{
+                          fontWeight: 700,
+                          fontSize: "16px",
+                          color:
+                            result.recommendedAction === "PASS"
+                              ? "#34d399"
+                              : result.recommendedAction === "MINOR_REVISION"
+                              ? "#A37210"
+                              : "#f87171",
+                        }}
+                      >
+                        BAC Recommendation:{" "}
+                        {result.recommendedAction.replace(/_/g, " ")}
+                      </p>
+                      <p
+                        style={{
+                          fontSize: "13px",
+                          color: "var(--text-secondary)",
+                          marginTop: "2px",
+                        }}
+                      >
+                        {result.recommendedAction === "PASS"
+                          ? "This criterion meets BAC requirements and is ready for submission."
+                          : result.recommendedAction === "MINOR_REVISION"
+                          ? "Small targeted improvements needed before formal BAC submission."
+                          : result.recommendedAction === "MAJOR_REVISION"
+                          ? "Significant gaps must be addressed — major revision required."
+                          : "Submission does not meet BAC requirements. Rebuild recommended."}
+                      </p>
+                    </div>
+                  </div>
+                )}
 
-{/* Evaluation Summary Card */}
-{/* {result.evaluationSummary && (
+                {/* Evaluation Summary Card */}
+                {/* {result.evaluationSummary && (
   <div className="card" style={{ padding: "24px", marginBottom: "24px" }}>
     <h3 style={{ fontWeight: 600, marginBottom: "16px", fontSize: "15px" }}>
       📊 Evaluation Summary
@@ -1319,6 +1403,7 @@ const getScoreLabel = (score: number, max: number) => {
                                   color: "var(--text-secondary)",
                                   fontSize: "13px",
                                   lineHeight: 1.6,
+                                  textAlign: "justify",
                                 }}
                               >
                                 {fr.feedback}
@@ -1331,17 +1416,20 @@ const getScoreLabel = (score: number, max: number) => {
                                   height: "70px",
                                   borderRadius: "50%",
                                   background: `radial-gradient(circle, ${getScoreColor(
-                                    fr.score, result.maxPossibleScore
+                                    fr.score,
+                                    result.maxPossibleScore
                                   )}10, transparent)`,
                                   border: `3px solid ${getScoreColor(
-                                    fr.score, result.maxPossibleScore
+                                    fr.score,
+                                    result.maxPossibleScore
                                   )}`,
                                   display: "flex",
                                   alignItems: "center",
                                   justifyContent: "center",
                                   flexDirection: "column",
                                   boxShadow: `0 2px 12px ${getScoreColor(
-                                    fr.score, result.maxPossibleScore
+                                    fr.score,
+                                    result.maxPossibleScore
                                   )}25`,
                                 }}
                               >
@@ -1349,7 +1437,10 @@ const getScoreLabel = (score: number, max: number) => {
                                   className="font-display"
                                   style={{
                                     fontSize: "18px",
-                                    color: getScoreColor(fr.score, result.maxPossibleScore),
+                                    color: getScoreColor(
+                                      fr.score,
+                                      result.maxPossibleScore
+                                    ),
                                   }}
                                 >
                                   {fr.score}
@@ -1367,10 +1458,16 @@ const getScoreLabel = (score: number, max: number) => {
                                 style={{
                                   marginTop: "6px",
                                   fontSize: "11px",
-                                  color: getScoreColor(fr.score, result.maxPossibleScore),
+                                  color: getScoreColor(
+                                    fr.score,
+                                    result.maxPossibleScore
+                                  ),
                                 }}
                               >
-                                {getScoreLabel(fr.score, result.maxPossibleScore)}
+                                {getScoreLabel(
+                                  fr.score,
+                                  result.maxPossibleScore
+                                )}
                               </div>
                             </div>
                           </div>
@@ -1382,58 +1479,120 @@ const getScoreLabel = (score: number, max: number) => {
                             <div
                               className="progress-fill"
                               style={{
-                                width: `${(fr.score / result.maxPossibleScore) * 100}%`,
+                                width: `${
+                                  (fr.score / result.maxPossibleScore) * 100
+                                }%`,
                                 background: `linear-gradient(90deg, ${getScoreColor(
-                                  fr.score, result.maxPossibleScore
-                                )}, ${getScoreColor(fr.score, result.maxPossibleScore)}aa)`,
+                                  fr.score,
+                                  result.maxPossibleScore
+                                )}, ${getScoreColor(
+                                  fr.score,
+                                  result.maxPossibleScore
+                                )}aa)`,
                               }}
                             />
                           </div>
                           {/* Covers Requirements */}
-{fr.coveredFiles.length > 0 && (
-  <div style={{ marginBottom: "12px" }}>
-    <p style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "6px" }}>
-      Evidence covered by this file:
-    </p>
-    <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
-      {fr.coveredFiles.map((req, j) => (
-        <span key={j} style={{
-          fontSize: "11px", padding: "3px 8px", borderRadius: "6px",
-          background: "rgba(16,185,129,0.08)", color: "#34d399",
-          border: "1px solid rgba(16,185,129,0.2)",
-        }}>
-          ✓ {req}
-        </span>
-      ))}
-    </div>
-  </div>
-)}
+                          {fr.coveredFiles.length > 0 && (
+                            <div style={{ marginBottom: "12px" }}>
+                              <p
+                                style={{
+                                  fontSize: "12px",
+                                  color: "var(--text-muted)",
+                                  marginBottom: "6px",
+                                }}
+                              >
+                                Evidence covered by this file:
+                              </p>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  flexWrap: "wrap",
+                                  gap: "6px",
+                                }}
+                              >
+                                {fr.coveredFiles.map((req, j) => (
+                                  <span
+                                    key={j}
+                                    style={{
+                                      fontSize: "11px",
+                                      padding: "3px 8px",
+                                      borderRadius: "6px",
+                                      background: "rgba(16,185,129,0.08)",
+                                      color: "#34d399",
+                                      border: "1px solid rgba(16,185,129,0.2)",
+                                    }}
+                                  >
+                                    ✓ {req}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          )}
 
-{/* Checklist Results */}
-{fr.checklistResults && Object.keys(fr.checklistResults).length > 0 && (
-  <div style={{ marginBottom: "16px" }}>
-    <p style={{ fontSize: "12px", fontWeight: 600, color: "var(--text-secondary)", marginBottom: "8px" }}>
-      Criterion Checklist:
-    </p>
-    <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-      {Object.entries(fr.checklistResults).map(([key, met], j) => (
-        <div key={j} style={{
-          display: "flex", alignItems: "center", gap: "8px",
-          padding: "6px 10px", borderRadius: "6px",
-          background: met ? "rgba(16,185,129,0.05)" : "rgba(239,68,68,0.04)",
-          border: `1px solid ${met ? "rgba(16,185,129,0.15)" : "rgba(239,68,68,0.12)"}`,
-        }}>
-          <span style={{ color: met ? "#34d399" : "#f87171", fontSize: "12px" }}>
-            {met ? "✓" : "✕"}
-          </span>
-          <span style={{ fontSize: "12px", color: "var(--text-secondary)" }}>
-            {key}
-          </span>
-        </div>
-      ))}
-    </div>
-  </div>
-)}
+                          {/* Checklist Results */}
+                          {fr.checklistResults &&
+                            Object.keys(fr.checklistResults).length > 0 && (
+                              <div style={{ marginBottom: "16px" }}>
+                                <p
+                                  style={{
+                                    fontSize: "12px",
+                                    fontWeight: 600,
+                                    color: "var(--text-secondary)",
+                                    marginBottom: "8px",
+                                  }}
+                                >
+                                  Criterion Checklist:
+                                </p>
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    gap: "4px",
+                                  }}
+                                >
+                                  {Object.entries(fr.checklistResults).map(
+                                    ([key, met], j) => (
+                                      <div
+                                        key={j}
+                                        style={{
+                                          display: "flex",
+                                          alignItems: "center",
+                                          gap: "8px",
+                                          padding: "6px 10px",
+                                          borderRadius: "6px",
+                                          background: met
+                                            ? "rgba(16,185,129,0.05)"
+                                            : "rgba(239,68,68,0.04)",
+                                          border: `1px solid ${
+                                            met
+                                              ? "rgba(16,185,129,0.15)"
+                                              : "rgba(239,68,68,0.12)"
+                                          }`,
+                                        }}
+                                      >
+                                        <span
+                                          style={{
+                                            color: met ? "#34d399" : "#f87171",
+                                            fontSize: "12px",
+                                          }}
+                                        >
+                                          {met ? "✓" : "✕"}
+                                        </span>
+                                        <span
+                                          style={{
+                                            fontSize: "12px",
+                                            color: "var(--text-secondary)",
+                                          }}
+                                        >
+                                          {key}
+                                        </span>
+                                      </div>
+                                    )
+                                  )}
+                                </div>
+                              </div>
+                            )}
 
                           <div
                             style={{

@@ -490,18 +490,14 @@ export default function AdminPage() {
                   className="card"
                   style={{
                     padding: "20px 24px",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "16px",
                   }}
                 >
-                  <div style={{ flex: 1 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "12px" }}>
                     <div
                       style={{
                         display: "flex",
                         alignItems: "center",
                         gap: "10px",
-                        marginBottom: "6px",
                       }}
                     >
                       <span
@@ -512,57 +508,57 @@ export default function AdminPage() {
                       </span>
                       <span style={{ fontWeight: 600 }}>{s.title}</span>
                     </div>
-                    <div
-                      className="standard-html"
-                      style={{
-                        color: "var(--text-secondary)",
-                        fontSize: "13px",
-                        lineHeight: 1.5,
-                      }}
-                      dangerouslySetInnerHTML={{ __html: s.descriptionHtml || (s.description + "...") }}
-                    />
-                    <div
-                      style={{ marginTop: "8px", display: "flex", gap: "8px" }}
-                    >
-                      <span
-                        className="tag tag-purple"
-                        style={{ fontSize: "11px" }}
+                    <div style={{ display: "flex", gap: "8px", flexShrink: 0 }}>
+                      <button
+                        className="btn-outline"
+                        style={{ padding: "8px 14px", fontSize: "13px" }}
+                        onClick={() => {
+                          setSelectedStandard(s);
+                          setView("criteria");
+                        }}
                       >
-                        {s.criteria.length} criteria
-                      </span>
-                      <span
-                        className="tag tag-green"
-                        style={{ fontSize: "11px" }}
+                        Manage →
+                      </button>
+                      <button
+                        className="btn-outline"
+                        style={{ padding: "8px 14px", fontSize: "13px" }}
+                        onClick={() => setShowEditStandard({ ...s })}
                       >
-                        {s.demoFiles.length} demo files
-                      </span>
+                        Edit
+                      </button>
+                      <button
+                        className="btn-danger"
+                        style={{ padding: "8px 14px" }}
+                        onClick={() => deleteStandard(s.id)}
+                      >
+                        Delete
+                      </button>
                     </div>
                   </div>
-                  <div style={{ display: "flex", gap: "8px" }}>
-                    <button
-                      className="btn-outline"
-                      style={{ padding: "8px 14px", fontSize: "13px" }}
-                      onClick={() => {
-                        setSelectedStandard(s);
-                        setView("criteria");
-                      }}
+                  <div
+                    className="standard-html"
+                    style={{
+                      color: "var(--text-secondary)",
+                      fontSize: "13px",
+                      lineHeight: 1.5,
+                    }}
+                    dangerouslySetInnerHTML={{ __html: s.descriptionHtml || (s.description + "...") }}
+                  />
+                  <div
+                    style={{ marginTop: "12px", display: "flex", gap: "8px" }}
+                  >
+                    <span
+                      className="tag tag-purple"
+                      style={{ fontSize: "11px" }}
                     >
-                      Manage →
-                    </button>
-                    <button
-                      className="btn-outline"
-                      style={{ padding: "8px 14px", fontSize: "13px" }}
-                      onClick={() => setShowEditStandard({ ...s })}
+                      {s.criteria.length} criteria
+                    </span>
+                    <span
+                      className="tag tag-green"
+                      style={{ fontSize: "11px" }}
                     >
-                      Edit
-                    </button>
-                    <button
-                      className="btn-danger"
-                      style={{ padding: "8px 14px" }}
-                      onClick={() => deleteStandard(s.id)}
-                    >
-                      Delete
-                    </button>
+                      {s.demoFiles.length} demo files
+                    </span>
                   </div>
                 </div>
               ))}
@@ -680,20 +676,13 @@ export default function AdminPage() {
                       className="card"
                       style={{ padding: "20px 24px" }}
                     >
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "flex-start",
-                          gap: "16px",
-                        }}
-                      >
-                        <div style={{ flex: 1 }}>
+                      <div>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "12px" }}>
                           <div
                             style={{
                               display: "flex",
                               alignItems: "center",
                               gap: "10px",
-                              marginBottom: "8px",
                             }}
                           >
                             <span
@@ -717,115 +706,115 @@ export default function AdminPage() {
                             </span>
                           </div>
                           <div
-                            className="standard-html"
-                            style={{
-                              color: "var(--text-secondary)",
-                              fontSize: "13px",
-                              marginBottom: "10px",
-                            }}
-                            dangerouslySetInnerHTML={{ __html: c.descriptionHtml || c.description }}
-                          />
+                            style={{ display: "flex", gap: "8px", flexShrink: 0 }}
+                          >
+                            <button
+                              className="btn-outline"
+                              style={{ padding: "8px 14px", fontSize: "13px" }}
+                              onClick={() => setShowEditCriterion({ ...c })}
+                            >
+                              Edit
+                            </button>
+                            <button
+                              className="btn-danger"
+                              style={{ padding: "8px 14px" }}
+                              onClick={() => deleteCriterion(c.id)}
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        </div>
+                        <div
+                          className="standard-html"
+                          style={{
+                            color: "var(--text-secondary)",
+                            fontSize: "13px",
+                            marginBottom: "10px",
+                          }}
+                          dangerouslySetInnerHTML={{ __html: c.descriptionHtml || c.description }}
+                        />
+                        <div
+                          style={{
+                            marginTop: "12px",
+                            padding: "12px 16px",
+                            background: "var(--green-50)",
+                            border: "1px solid rgba(0,106,78,0.1)",
+                            borderRadius: "10px",
+                          }}
+                        >
                           <div
                             style={{
-                              marginTop: "12px",
-                              padding: "12px 16px",
-                              background: "var(--green-50)",
-                              border: "1px solid rgba(0,106,78,0.1)",
+                              fontSize: "12px",
+                              fontWeight: 600,
+                              color: "var(--green-800)",
+                              marginBottom: "8px",
+                              display: "flex",
+                              alignItems: "center",
+                              gap: "6px",
+                            }}
+                          >
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                            Required Evidence Documents ({c.requiredFiles.length})
+                          </div>
+                          <ul
+                            style={{
+                              listStyle: "none",
+                              padding: 0,
+                              margin: 0,
+                              display: "flex",
+                              flexDirection: "column",
+                              gap: "6px",
+                            }}
+                          >
+                            {c.requiredFiles.map((f, i) => (
+                              <li
+                                key={i}
+                                style={{
+                                  fontSize: "12px",
+                                  color: "var(--text-secondary)",
+                                  display: "flex",
+                                  alignItems: "flex-start",
+                                  gap: "8px",
+                                  lineHeight: 1.4,
+                                }}
+                              >
+                                <span style={{ color: "var(--green-700)", marginTop: "-1px" }}>•</span>
+                                <span>{f}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        {(c.guidelinesHtml || c.guidelines) && (
+                          <div
+                            style={{
+                              marginTop: "16px",
+                              padding: "16px",
+                              background: "rgba(0,106,78,0.05)",
                               borderRadius: "10px",
+                              border: "1px solid rgba(0,106,78,0.10)",
                             }}
                           >
                             <div
                               style={{
                                 fontSize: "12px",
                                 fontWeight: 600,
-                                color: "var(--green-800)",
-                                marginBottom: "8px",
-                                display: "flex",
-                                alignItems: "center",
-                                gap: "6px",
+                                color: "#006A4E",
+                                marginBottom: "12px",
                               }}
                             >
-                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                              Required Evidence Documents ({c.requiredFiles.length})
+                              📌 Evaluation Guidelines:
                             </div>
-                            <ul
-                              style={{
-                                listStyle: "none",
-                                padding: 0,
-                                margin: 0,
-                                display: "flex",
-                                flexDirection: "column",
-                                gap: "6px",
-                              }}
-                            >
-                              {c.requiredFiles.map((f, i) => (
-                                <li
-                                  key={i}
-                                  style={{
-                                    fontSize: "12px",
-                                    color: "var(--text-secondary)",
-                                    display: "flex",
-                                    alignItems: "flex-start",
-                                    gap: "8px",
-                                    lineHeight: 1.4,
-                                  }}
-                                >
-                                  <span style={{ color: "var(--green-700)", marginTop: "-1px" }}>•</span>
-                                  <span>{f}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                          {(c.guidelinesHtml || c.guidelines) && (
                             <div
+                              className="standard-html"
                               style={{
-                                marginTop: "16px",
-                                padding: "16px",
-                                background: "rgba(0,106,78,0.05)",
-                                borderRadius: "10px",
-                                border: "1px solid rgba(0,106,78,0.10)",
+                                fontSize: "12px",
+                                color: "var(--text-secondary)",
+                                lineHeight: 1.6,
                               }}
-                            >
-                              <div
-                                style={{
-                                  fontSize: "12px",
-                                  fontWeight: 600,
-                                  color: "#006A4E",
-                                  marginBottom: "12px",
-                                }}
-                              >
-                                📌 Evaluation Guidelines:
-                              </div>
-                              <div
-                                className="standard-html"
-                                style={{
-                                  fontSize: "12px",
-                                  color: "var(--text-secondary)",
-                                  lineHeight: 1.6,
-                                }}
-                                dangerouslySetInnerHTML={{ __html: c.guidelinesHtml || c.guidelines }}
-                              />
-                            </div>
-                          )}
-                        </div>
-                        <div
-                          style={{ display: "flex", gap: "8px", flexShrink: 0 }}
-                        >
-                          <button
-                            className="btn-outline"
-                            style={{ padding: "8px 14px", fontSize: "13px" }}
-                            onClick={() => setShowEditCriterion({ ...c })}
-                          >
-                            Edit
-                          </button>
-                          <button
-                            className="btn-danger"
-                            style={{ padding: "8px 14px" }}
-                            onClick={() => deleteCriterion(c.id)}
-                          >
-                            Delete
-                          </button>
-                        </div>
+                              dangerouslySetInnerHTML={{ __html: c.guidelinesHtml || c.guidelines }}
+                            />
+                          </div>
+                        )}
                       </div>
                     </div>
                   ))}
@@ -897,91 +886,84 @@ export default function AdminPage() {
                       className="card"
                       style={{ padding: "20px 24px" }}
                     >
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "flex-start",
-                          gap: "16px",
-                        }}
-                      >
-                        <div style={{ flex: 1 }}>
+                      <div>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "12px" }}>
                           <div
                             style={{
                               display: "flex",
                               alignItems: "center",
                               gap: "10px",
-                              marginBottom: "8px",
                             }}
                           >
                             <span style={{ fontSize: "20px" }}>📁</span>
                             <span style={{ fontWeight: 600 }}>{df.name}</span>
                           </div>
                           <div
-                            className="standard-html"
-                            style={{
-                              color: "var(--text-secondary)",
-                              fontSize: "13px",
-                              marginBottom: "10px",
-                            }}
-                            dangerouslySetInnerHTML={{ __html: df.descriptionHtml || df.description }}
-                          />
-                          <div
-                            style={{
-                              padding: "12px",
-                              background: "rgba(0,0,0,0.04)",
-                              borderRadius: "8px",
-                              fontSize: "12px",
-                              color: "var(--text-muted)",
-                              fontFamily: "monospace",
-                              maxHeight: "100px",
-                              overflow: "hidden",
-                            }}
+                            style={{ display: "flex", gap: "8px", flexShrink: 0 }}
                           >
-                            {df.content}...
+                            <button
+                              className="btn-outline"
+                              style={{ padding: "8px 14px", fontSize: "13px" }}
+                              onClick={() => setShowEditDemo({ ...df })}
+                            >
+                              Edit
+                            </button>
+                            <button
+                              className="btn-danger"
+                              style={{ padding: "8px 14px" }}
+                              onClick={() => deleteDemoFile(df.id)}
+                            >
+                              Delete
+                            </button>
                           </div>
-                          {df.relatedCriteria.length > 0 && (
-                            <div style={{ marginTop: "8px" }}>
-                              <span
-                                style={{
-                                  fontSize: "12px",
-                                  color: "var(--text-muted)",
-                                }}
-                              >
-                                Related criteria:{" "}
-                              </span>
-                              {df.relatedCriteria.map((rc, i) => (
-                                <span
-                                  key={i}
-                                  className="tag tag-blue"
-                                  style={{
-                                    fontSize: "11px",
-                                    marginLeft: "4px",
-                                  }}
-                                >
-                                  {rc}
-                                </span>
-                              ))}
-                            </div>
-                          )}
                         </div>
                         <div
-                          style={{ display: "flex", gap: "8px", flexShrink: 0 }}
+                          className="standard-html"
+                          style={{
+                            color: "var(--text-secondary)",
+                            fontSize: "13px",
+                            marginBottom: "10px",
+                          }}
+                          dangerouslySetInnerHTML={{ __html: df.descriptionHtml || df.description }}
+                        />
+                        <div
+                          style={{
+                            padding: "12px",
+                            background: "rgba(0,0,0,0.04)",
+                            borderRadius: "8px",
+                            fontSize: "12px",
+                            color: "var(--text-muted)",
+                            fontFamily: "monospace",
+                            maxHeight: "100px",
+                            overflow: "hidden",
+                          }}
                         >
-                          <button
-                            className="btn-outline"
-                            style={{ padding: "8px 14px", fontSize: "13px" }}
-                            onClick={() => setShowEditDemo({ ...df })}
-                          >
-                            Edit
-                          </button>
-                          <button
-                            className="btn-danger"
-                            style={{ padding: "8px 14px" }}
-                            onClick={() => deleteDemoFile(df.id)}
-                          >
-                            Delete
-                          </button>
+                          {df.content}...
                         </div>
+                        {df.relatedCriteria.length > 0 && (
+                          <div style={{ marginTop: "12px" }}>
+                            <span
+                              style={{
+                                fontSize: "12px",
+                                color: "var(--text-muted)",
+                              }}
+                            >
+                              Related criteria:{" "}
+                            </span>
+                            {df.relatedCriteria.map((rc, i) => (
+                              <span
+                                key={i}
+                                className="tag tag-blue"
+                                style={{
+                                  fontSize: "11px",
+                                  marginLeft: "4px",
+                                }}
+                              >
+                                {rc}
+                              </span>
+                            ))}
+                          </div>
+                        )}
                       </div>
                     </div>
                   ))}
