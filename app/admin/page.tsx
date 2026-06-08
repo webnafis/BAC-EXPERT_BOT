@@ -916,15 +916,15 @@ export default function AdminPage() {
                             <span style={{ fontSize: "20px" }}>📁</span>
                             <span style={{ fontWeight: 600 }}>{df.name}</span>
                           </div>
-                          <p
+                          <div
+                            className="standard-html"
                             style={{
                               color: "var(--text-secondary)",
                               fontSize: "13px",
                               marginBottom: "10px",
                             }}
-                          >
-                            {df.description}
-                          </p>
+                            dangerouslySetInnerHTML={{ __html: df.descriptionHtml || df.description }}
+                          />
                           <div
                             style={{
                               padding: "12px",

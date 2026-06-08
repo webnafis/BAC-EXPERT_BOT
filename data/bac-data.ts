@@ -26,6 +26,7 @@ export interface DemoFile {
   id: string;
   name: string;
   description: string;
+  descriptionHtml?: string;
   content: string; // text content of the demo file
   relatedCriteria: string[]; // criterion ids
 }
@@ -194,6 +195,37 @@ contains comparable structural depth, measurable targets, budget allocation,
 timeline clarity, and stakeholder alignment. Do NOT penalize a user's document 
 for being from a different institution — evaluate structure and content quality, 
 not name or style similarity.`,
+        descriptionHtml: `
+<p>This is a benchmark-quality Strategic Plan document submitted for BAC criterion 1.2 evaluation. It represents the standard a well-prepared departmental strategic plan should meet.</p>
+<div style=" padding: 0; margin-bottom: 12px;">
+  <p style="margin:0px;"><strong>DOCUMENT TYPE:</strong> Departmental Strategic Plan (2025–2033)</p>
+  <p style="margin:0px;"><strong>INSTITUTION:</strong> Dept. of CSE, Khwaja Yunus Ali University (KYAU)</p>
+  <p style="margin:0px;"><strong>COVERS:</strong> All 5 BAC-required evidence checkpoints for criterion 1.2</p>
+</div>
+<p><strong>WHAT THIS BENCHMARK SATISFIES:</strong></p>
+<ul>
+  <li><strong>✔ Checkpoint 1 — Strategic Plan with goals, objectives, actions, timeline, budget, and indicators:</strong> Present. The document contains 7 structured Goals, each broken into Objectives → Targets → Action Steps → Success Measures → Responsible Persons → Timelines. A dedicated Budget Plan (BDT 2 Crore total, broken by category) and a 4-phase Timeline Overview (2025–2033) are included.</li>
+  <li><strong>✔ Checkpoint 2 — Formal Approval Evidence:</strong> Present. The cover page states "Approved: June 2025" and the document is issued under the Faculty of Science and Engineering authority.</li>
+  <li><strong>✔ Checkpoint 3 — Stakeholder Input Collection Mechanism:</strong> Partially present. The preamble references data from "industry reports, employer feedback, alumni surveys" used during the needs assessment (Target 3.1.1). An Industry Advisory Board with bi-annual meetings is established (Target 5.1.2). However, a standalone stakeholder input form or survey instrument is not separately attached — this is a minor gap.</li>
+  <li><strong>✔ Checkpoint 4 — Minutes showing stakeholder input was considered:</strong> Partially present. The plan references structured faculty/industry consultation in curriculum review (Target 3.1.1) and IAB meeting minutes (Target 5.1.2), but formal minutes of the strategic planning meeting are not included within this document — departments should attach these separately.</li>
+  <li><strong>✔ Checkpoint 5 — Communication Evidence:</strong> Partially present. The plan mentions communication to stakeholders implicitly through its dissemination strategy (Goal 7), but an explicit communication link or circular is not embedded — departments should supplement with a website link or distribution record.</li>
+</ul>
+<p><strong>NOTABLE STRENGTHS FOR AI REFERENCE:</strong></p>
+<ul>
+  <li>Each goal has a structured table with Target / Objective / Action Steps / Success Measures / Responsible Party / Timeline — this is the correct format</li>
+  <li>Budget is broken down by category with a total (BDT 2,00,00,000)</li>
+  <li>Four implementation phases are clearly defined with milestones</li>
+  <li>Vision, Mission, Core Values, and Graduate Attributes are all present</li>
+  <li>Plan is aligned with BAC, BNQF, and 4IR/5IR standards</li>
+</ul>
+<p><strong>KNOWN GAPS IN THIS BENCHMARK (so AI does not over-reward):</strong></p>
+<ul>
+  <li>No standalone meeting minutes document for strategic plan approval</li>
+  <li>No separate stakeholder input survey/form attached</li>
+  <li>No explicit communication link (URL or circular) provided</li>
+  <li>Approval evidence is only a cover page note, not a signed authority letter</li>
+</ul>
+<p><strong>USE THIS BENCHMARK TO:</strong> evaluate whether a user-submitted strategic plan contains comparable structural depth, measurable targets, budget allocation, timeline clarity, and stakeholder alignment. Do NOT penalize a user's document for being from a different institution — evaluate structure and content quality, not name or style similarity.</p>`,
         content: `KHWAJA YUNUS ALI UNIVERSITY
 
 Enayetpur, Sirajganj, Bangladesh
