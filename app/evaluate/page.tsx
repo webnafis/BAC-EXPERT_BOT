@@ -670,24 +670,31 @@ const getScoreLabel = (score: number, max: number) => {
               <div
                 style={{
                   marginTop: "16px",
-                  padding: "14px",
+                  padding: "16px",
                   background: "rgba(0,106,78,0.05)",
                   borderRadius: "10px",
                   border: "1px solid rgba(0,106,78,0.10)",
                 }}
               >
-                <p
+                <div
+                  style={{
+                    fontSize: "12px",
+                    fontWeight: 600,
+                    color: "#006A4E",
+                    marginBottom: "12px",
+                  }}
+                >
+                  📌 Evaluation Guidelines:
+                </div>
+                <div
+                  className="standard-html"
                   style={{
                     fontSize: "12px",
                     color: "var(--text-secondary)",
                     lineHeight: 1.6,
                   }}
-                >
-                  <strong style={{ color: "#006A4E" }}>
-                    📌 Evaluation Guidelines:{" "}
-                  </strong>
-                  {selectedCriterion.guidelines}
-                </p>
+                  dangerouslySetInnerHTML={{ __html: selectedCriterion.guidelinesHtml || selectedCriterion.guidelines }}
+                />
               </div>
             </div>
 

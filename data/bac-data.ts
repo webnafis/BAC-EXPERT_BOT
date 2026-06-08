@@ -6,6 +6,7 @@ export interface Criterion {
   descriptionHtml?: string;
   requiredFiles: string[];
   guidelines: string;
+  guidelinesHtml?: string;
   weight: number; // 1-10
   checklistItems: string[];
 }
@@ -1603,6 +1604,19 @@ Strategic Plan 2025–2033 | Approved June 2025
       evidence must show a real channel (e.g., website link, email circulars, 
       notice board policy, shared portal) — stating "it was communicated" without 
       evidence is insufficient.`,
+        guidelinesHtml: `
+<p>The strategic plan must include <strong>ALL</strong> of the following to be considered complete:</p>
+<ul>
+  <li>Strategic goals aligned with HEI/PoE vision-mission</li>
+  <li>Specific objectives with measurable indicators</li>
+  <li>Necessary actions and responsible persons</li>
+  <li>Implementation timeline</li>
+  <li>Budget allocation per goal/action</li>
+  <li>KPIs or metrics to measure achievement</li>
+</ul>
+<p>Approval must be evidenced by official signed meeting minutes — verbal or informal approvals are not acceptable.</p>
+<p>Stakeholder input must be documented through a formal mechanism (e.g., survey, advisory board meeting, structured consultation) and minutes must explicitly show how that input was considered and incorporated.</p>
+<p>Communication evidence must show a real channel (e.g., website link, email circulars, notice board policy, shared portal) — stating "it was communicated" without evidence is insufficient.</p>`,
 
         weight: 5,
         checklistItems: [
