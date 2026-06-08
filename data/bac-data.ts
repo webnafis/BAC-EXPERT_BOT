@@ -3,6 +3,7 @@ export interface Criterion {
   code: string;
   title: string;
   description: string;
+  descriptionHtml?: string;
   requiredFiles: string[];
   guidelines: string;
   weight: number; // 1-10
@@ -1577,6 +1578,10 @@ Strategic Plan 2025–2033 | Approved June 2025
       considered. Evidence of formal approval through official meeting minutes is 
       required. Finally, the plan must be actively communicated to all concerned 
       stakeholders through a defined communication mechanism or link.`,
+        descriptionHtml: `
+<p>The Program of Engineering (PoE) must have a well-communicated, formally documented Strategic Plan that effectively guides the department's activities and is actively implemented to achieve the defined vision, mission, and objectives of both the HEI and the PoE.</p>
+<p>The strategic plan must not be a decorative document — it must demonstrate real operational use: it must contain strategic goals, measurable objectives, necessary actions, an implementation timeline, a budget allocation, and indicators to measure achievement progress.</p>
+<p>The plan must be developed through a participatory process where inputs from faculty, staff, and other stakeholders are formally collected and demonstrably considered. Evidence of formal approval through official meeting minutes is required. Finally, the plan must be actively communicated to all concerned stakeholders through a defined communication mechanism or link.</p>`,
 
         requiredFiles: [
           "Strategic Plan Document (with goals, objectives, actions, timeline, budget, and achievement indicators)",

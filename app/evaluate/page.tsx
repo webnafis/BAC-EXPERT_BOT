@@ -334,6 +334,7 @@ const getScoreLabel = (score: number, max: number) => {
                       </span>
                     </div>
                     <div
+                      className="standard-html"
                       style={{
                         color: "var(--text-secondary)",
                         fontSize: "13px",
@@ -469,16 +470,16 @@ const getScoreLabel = (score: number, max: number) => {
                         {c.title}
                       </span>
                     </div>
-                    <p
+                    <div
+                      className="standard-html"
                       style={{
                         color: "var(--text-secondary)",
                         fontSize: "13px",
                         lineHeight: 1.5,
                         marginBottom: "10px",
                       }}
-                    >
-                      {c.description}
-                    </p>
+                      dangerouslySetInnerHTML={{ __html: c.descriptionHtml || c.description }}
+                    />
                     <div
                       style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}
                     >
@@ -821,7 +822,7 @@ const getScoreLabel = (score: number, max: number) => {
               }}
             >
               {uploadedFiles.length === 0
-                ? "Upload at least one file to analyze"
+                ? "Upload file to analyze"
                 : `🔍 Analyze ${uploadedFiles.length} File${
                     uploadedFiles.length > 1 ? "s" : ""
                   } with AI`}

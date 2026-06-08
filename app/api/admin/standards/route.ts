@@ -8,7 +8,7 @@ export async function GET() {
 
 export async function POST(req: Request) {
   const body = await req.json();
-  const { title, code, description } = body;
+  const { title, code, description, descriptionHtml } = body;
   if (!title || !code || !description) {
     return NextResponse.json(
       { error: "Missing required fields" },
@@ -19,6 +19,7 @@ export async function POST(req: Request) {
     code,
     title,
     description,
+    descriptionHtml: descriptionHtml || description,
     criteria: [],
     demoFiles: [],
   });
