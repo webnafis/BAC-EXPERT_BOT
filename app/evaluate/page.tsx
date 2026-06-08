@@ -333,15 +333,14 @@ const getScoreLabel = (score: number, max: number) => {
                         {std.title}
                       </span>
                     </div>
-                    <p
+                    <div
                       style={{
                         color: "var(--text-secondary)",
                         fontSize: "13px",
                         lineHeight: 1.5,
                       }}
-                    >
-                      {std.description}...
-                    </p>
+                      dangerouslySetInnerHTML={{ __html: std.descriptionHtml || std.description }}
+                    />
                     <div style={{ marginTop: "8px" }}>
                       <span
                         className="tag tag-purple"

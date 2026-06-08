@@ -14,6 +14,8 @@ export interface Standard {
   code: string;
   title: string;
   description: string;
+
+  descriptionHtml: string;
   criteria: Criterion[];
   demoFiles: DemoFile[];
 }
@@ -31,7 +33,7 @@ export const BAC_STANDARDS: Standard[] = [
     id: "s1",
     code: "STD-1",
     title: "Governance",
-    description:`According to BAC, the Governance system must work in a manner 
+    description: `According to BAC, the Governance system must work in a manner 
 that ensures better management of the program towards the achievement of the 
 mission and objectives of the Higher Education Institution (HEI) and Program 
 Offering Entity (POE), in a way that effectively benefits the stakeholders.
@@ -67,11 +69,74 @@ evidence collectively demonstrates a fully functioning governance structure.
 The key BAC principle is that governance must "effectively benefit stakeholders" 
 — meaning documents must show active implementation and real operational impact, 
 not merely formal existence on paper.`,
+    descriptionHtml: `
+  <p>
+    According to BAC, the Governance system must work in a manner that ensures
+    better management of the program towards the achievement of the mission and
+    objectives of the Higher Education Institution (HEI) and Program Offering
+    Entity (POE), in a way that effectively benefits the stakeholders.
+  </p>
+
+  <p>
+    In practical terms, this standard asks: Does the department have a clear
+    institutional direction, structured operational plans, safe campus policies,
+    disciplined academic scheduling, appropriate class management, and a reliable
+    student data system — and are all of these formally documented, officially
+    approved, actively implemented, and communicated to all stakeholders?
+  </p>
+
+  <p><strong>This standard covers 6 criteria:</strong></p>
+  <ul>
+    <li>
+      <strong>Criterion 1.1: Vision, Mission &amp; Objectives</strong> —
+      formal documentation of HEI/POE vision, mission and objectives, approval
+      minutes, visible display, and inclusion in handbook/brochure
+    </li>
+    <li>
+      <strong>Criterion 1.2: Strategic Plan</strong> —
+      documented plan with goals, actions, timeline, budget, indicators,
+      approval minutes, stakeholder input mechanism, consideration minutes,
+      and communication evidence
+    </li>
+    <li>
+      <strong>Criterion 1.3: Sexual Harassment Policy</strong> —
+      documented policy and procedures, committee members list, meeting records,
+      responsible contact details, and communication evidence for a safe campus
+      environment
+    </li>
+    <li>
+      <strong>Criterion 1.4: Academic Calendar</strong> —
+      approved calendar with class start/end dates, exam schedules, result
+      publication dates, class notices, attendance registers, and result
+      notifications for last 2 years
+    </li>
+    <li>
+      <strong>Criterion 1.5: Class Size Policy</strong> —
+      documented class size policy, enrollment lists, section-wise attendance
+      registers, and evidence that class sizes support interactive teaching
+      and learning outcome attainment
+    </li>
+    <li>
+      <strong>Criterion 1.6: IT-Based Student Database</strong> —
+      functional student database with contact details, academic records,
+      number of enrolled students, profile viewers, assigned staff, and
+      physical verification readiness
+    </li>
+  </ul>
+
+  <p>
+    When evaluating documents under Standard 1, assess whether the submitted
+    evidence collectively demonstrates a fully functioning governance structure.
+    The key BAC principle is that governance must <em>"effectively benefit
+    stakeholders"</em> — meaning documents must show active implementation and
+    real operational impact, not merely formal existence on paper.
+  </p>
+`,
     demoFiles: [
       {
         id: "df1",
         name: "CSE_Strategic_Plan_KYAU_2025-2033.docx",
-        description:`This is a benchmark-quality Strategic Plan document submitted for 
+        description: `This is a benchmark-quality Strategic Plan document submitted for 
 BAC criterion 1.2 evaluation. It represents the standard a well-prepared 
 departmental strategic plan should meet.
 
@@ -1512,7 +1577,7 @@ Strategic Plan 2025–2033 | Approved June 2025
       considered. Evidence of formal approval through official meeting minutes is 
       required. Finally, the plan must be actively communicated to all concerned 
       stakeholders through a defined communication mechanism or link.`,
-      
+
         requiredFiles: [
           "Strategic Plan Document (with goals, objectives, actions, timeline, budget, and achievement indicators)",
           "Minutes of Meeting — Strategic Plan Approval",
@@ -1520,7 +1585,7 @@ Strategic Plan 2025–2033 | Approved June 2025
           "Minutes of Meeting — Stakeholder Input Consideration (faculty, staff, and others)",
           "Communication Link or Evidence showing how the Strategic Plan is communicated to stakeholders",
         ],
-      
+
         guidelines: `The strategic plan must include ALL of the following to be considered 
       complete: (1) strategic goals aligned with HEI/PoE vision-mission, (2) specific 
       objectives with measurable indicators, (3) necessary actions and responsible 
@@ -1533,9 +1598,10 @@ Strategic Plan 2025–2033 | Approved June 2025
       evidence must show a real channel (e.g., website link, email circulars, 
       notice board policy, shared portal) — stating "it was communicated" without 
       evidence is insufficient.`,
-      
+
         weight: 5,
-        checklistItems: [                                          // ← ADD THIS
+        checklistItems: [
+          // ← ADD THIS
           "Strategic plan document exists as a formally structured standalone document",
           "Plan contains strategic goals aligned with HEI/POE vision and mission",
           "Plan contains specific objectives with measurable indicators (KPIs)",
@@ -1547,10 +1613,9 @@ Strategic Plan 2025–2033 | Approved June 2025
           "Minutes of meeting showing stakeholder inputs were considered are present",
           "A communication link or evidence showing how the plan is communicated to stakeholders is provided",
         ],
-      }
+      },
     ],
   },
-
 ];
 
 // In-memory data store (in production, use a database)
