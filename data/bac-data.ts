@@ -2804,7 +2804,7 @@ export function deleteDemoFile(standardId: string, fileId: string): boolean {
 }
 
 // Global Settings
-let ngrokUrl = "https://frightful-negate-bony.ngrok-free.dev";
+let ngrokUrl = "https://mulch-outburst-malt.ngrok-free.dev";
 
 export function getNgrokUrl(): string {
   return ngrokUrl;
