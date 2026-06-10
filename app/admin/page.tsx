@@ -5,7 +5,7 @@ import type { Standard, Criterion, DemoFile } from "@/data/bac-data";
 import { Loader, LoaderOverlay } from "@/components/Loader";
 import { Modal } from "@/components/Modal";
 
-type AdminView = "standards" | "criteria" | "demo-files";
+type AdminView = "standards" | "criteria" | "demo-files" | "settings";
 
 export default function AdminPage() {
   const [view, setView] = useState<AdminView>("standards");
@@ -19,6 +19,10 @@ export default function AdminPage() {
     text: string;
     type: "success" | "error";
   } | null>(null);
+
+  // Settings State
+  const [ngrokUrl, setNgrokUrl] = useState("");
+  const [savingSettings, setSavingSettings] = useState(false);
 
   // Modals
   const [showAddStandard, setShowAddStandard] = useState(false);
@@ -50,8 +54,21 @@ export default function AdminPage() {
     }
   };
 
+  const fetchSettings = async () => {
+    try {
+      const res = await fetch("/api/admin/settings");
+      if (res.ok) {
+        const data = await res.json();
+        setNgrokUrl(data.ngrokUrl || "");
+      }
+    } catch (err) {
+      console.error("Failed to fetch settings", err);
+    }
+  };
+
   useEffect(() => {
     fetchStandards();
+    fetchSettings();
   }, []);
 
   const showMsg = (text: string, type: "success" | "error" = "success") => {
@@ -359,6 +376,18 @@ export default function AdminPage() {
           </span>
         </button>
 
+        <button
+          className={`admin-nav-item ${
+            view === "settings" ? "active" : ""
+          }`}
+          onClick={() => {
+            setView("settings");
+            setSelectedStandard(null);
+          }}
+        >
+          <span>⚙️</span> Settings
+        </button>
+
         {standards.length > 0 && (
           <div style={{ marginTop: "8px" }}>
             <p
@@ -447,6 +476,76 @@ export default function AdminPage() {
           >
             {msg.type === "success" ? "✓ " : "✕ "}
             {msg.text}
+          </div>
+        )}
+
+        {/* Settings View */}
+        {view === "settings" && (
+          <div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginBottom: "32px",
+              }}
+            >
+              <div>
+                <h1
+                  className="font-display"
+                  style={{ fontSize: "32px", marginBottom: "6px" }}
+                >
+                  System Settings
+                </h1>
+                <p style={{ color: "var(--text-secondary)" }}>
+                  Configure global application settings
+                </p>
+              </div>
+            </div>
+
+            <div className="card" style={{ padding: "24px", maxWidth: "600px" }}>
+              <div className="form-group">
+                <label style={labelStyle}>AI ngrok URL</label>
+                <input
+                  type="text"
+                  className="input-field"
+                  placeholder="https://your-ngrok-url.ngrok-free.dev"
+                  value={ngrokUrl}
+                  onChange={(e) => setNgrokUrl(e.target.value)}
+                  style={{ width: "100%" }}
+                />
+                <p style={{ fontSize: "12px", color: "var(--text-muted)", marginTop: "6px" }}>
+                  The base URL for the AI analyzer. Must include protocol (http/https) and no trailing slash.
+                </p>
+              </div>
+              
+              <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "24px" }}>
+                <button
+                  className="btn-primary"
+                  onClick={async () => {
+                    setSavingSettings(true);
+                    try {
+                      const res = await fetch("/api/admin/settings", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ ngrokUrl }),
+                      });
+                      if (res.ok) {
+                        showMsg("Settings saved successfully!");
+                      } else {
+                        showMsg("Failed to save settings", "error");
+                      }
+                    } catch {
+                      showMsg("Failed to save settings", "error");
+                    }
+                    setSavingSettings(false);
+                  }}
+                  disabled={savingSettings}
+                >
+                  {savingSettings ? "Saving..." : "Save Settings"}
+                </button>
+              </div>
+            </div>
           </div>
         )}
 

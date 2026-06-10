@@ -1,3 +1,4 @@
+import { getNgrokUrl } from "@/data/bac-data";
 import type { Standard, Criterion } from "@/data/bac-data";
 
 export interface UploadedFile {
@@ -27,8 +28,6 @@ export interface FileResult {
   improvements: string[];
   checklistResults: Record<string, boolean>; // ← NEW
 }
-
-const AI_BASE_URL = "https://frightful-negate-bony.ngrok-free.dev";
 
 // ai-analyzer.ts
 
@@ -277,7 +276,7 @@ export async function analyzeWithAI(
 ): Promise<AnalysisResult> {
   const prompt = buildBACScoringPrompt(standard, criterion, uploadedFiles, demoFileContents);
 console.log(prompt);
-  const response = await fetch(`${AI_BASE_URL}/api/chat`, {
+  const response = await fetch(`${getNgrokUrl()}/api/chat`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({

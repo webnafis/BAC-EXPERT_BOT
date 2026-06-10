@@ -2802,3 +2802,14 @@ export function deleteDemoFile(standardId: string, fileId: string): boolean {
   std.demoFiles.splice(idx, 1);
   return true;
 }
+
+// Global Settings
+let ngrokUrl = "https://frightful-negate-bony.ngrok-free.dev";
+
+export function getNgrokUrl(): string {
+  return ngrokUrl;
+}
+
+export function setNgrokUrl(url: string): void {
+  ngrokUrl = url;
+}
