@@ -1597,123 +1597,98 @@ Strategic Plan 2025–2033 | Approved June 2025
       {
         id: "df2",
         name: "CSE_VMO_Evidence_Package_KYAU_2022-2024.pdf",
-        description: `This is a benchmark-quality VMO evidence package submitted for BAC 
-criterion 1.1 evaluation. It represents real institutional documents from KYAU CSE 
-documenting the complete VMO development and approval process across 2022–2024.
+        description: `This is a benchmark evidence package submitted for BAC criterion 1.1 
+evaluation. It contains multiple documents spanning 2022–2024 that collectively 
+demonstrate the process of developing, approving, and operationalizing the Vision, 
+Mission & Objectives of the CSE Department at KYAU.
 
-DOCUMENT TYPE: Multi-document Evidence Package for Criterion 1.1
+DOCUMENT TYPE: Multi-document evidence package (meeting notices, minutes, 
+survey questionnaire, governance report, compliance certificate)
 INSTITUTION: Dept. of CSE, Khwaja Yunus Ali University (KYAU)
-COVERS: Checkpoints 1–4 of BAC criterion 1.1 (with known gaps in checkpoints 5–8)
+COVERS: Checkpoints 1 and 2 of the 4 BAC-required evidence items for criterion 1.1
 
 WHAT THIS BENCHMARK SATISFIES:
-✔ Checkpoint 1 — Statement of Mission/Vision of PoE: Present. The Vision and 
-  Mission were formally finalized and adopted in the 7th Academic Committee Meeting 
-  (July 18, 2024), signed by the Head of Department, with the full VMO text recorded 
-  in the minutes.
+✔ Checkpoint 1 — Copy of defined Vision/Mission/Objectives of HEI and PoE: 
+  Partially present. The July 18, 2024 Academic Committee meeting (7th meeting) 
+  formally resolved the PoE Vision and Mission with full text and HOD signature. 
+  However, a separate standalone HEI-level (university-wide) V&M document is not 
+  included — only the PoE-level statement is documented here.
 
-✔ Checkpoint 2 — Meeting Minutes for VMO Approval: Present and multi-layered:
-  - Minutes dated 28.4.2022 — initial committee formed to draft VMO
-  - Minutes dated 12.5.2022 — stakeholder survey form approved with scheduled dates
-  - Minutes dated 16.6.2022 — VMO finalized based on survey analysis
-  - Academic Committee proceedings, July 18, 2024 — VMO formally adopted with full text
-  - Academic Committee proceedings, November 18, 2024 — committee re-established 
-    for further institutional alignment
+✔ Checkpoint 2 — Minutes of Meeting for Approval: Present, across multiple meetings.
+  The process is documented in stages: (a) April 28, 2022 — decision to conduct 
+  stakeholder survey for V&M preparation; (b) May 12, 2022 — approval of survey 
+  questionnaire; (c) June 16, 2022 — finalization of V&M based on survey results; 
+  (d) July 18, 2024 — formal resolution with complete V&M text; (e) November 18, 
+  2024 — dedicated committee formed for ongoing alignment with institutional goals. 
+  All minutes have faculty signatures.
 
-✔ Checkpoint 3 — Stakeholder Acceptance Survey Instrument: Present. A formal 
-  18-question survey questionnaire form is included, covering all 6 governance criteria. 
-  Questions 1–3 directly address criterion 1.1 (VMO clarity, HEI alignment, 
-  stakeholder service).
+✘ Checkpoint 3 — Visible Display: Not demonstrated. No photographs or signed 
+  attestation of physical display of Vision/Mission on notice boards, walls, or 
+  public areas is included in this package — this is a significant gap.
 
-✔ Checkpoint 4 — Survey Report with Quantitative Analysis: Present. The Summer 2022 
-  CSEPAC Governance Survey Report includes criterion 1.1 results: 75% faculty, 79% 
-  students, 100% staff, 64% alumni satisfaction — overall 79.5%, exceeding the 70% 
-  KPI threshold. Score recorded as 4 out of 5.
+✘ Checkpoint 4 — Included in Handbook/Brochure: Not demonstrated. No handbook 
+  or brochure excerpt is included showing where the V&M appears — another 
+  significant gap.
 
-✗ Checkpoint 5 — Visible Display Evidence: NOT present. No photograph, notice board 
-  image, or screenshot showing VMO physically or digitally displayed is included.
-
-✗ Checkpoint 6 — AC/Syndicate Resolution: Partially present. Department-level 
-  Academic Committee minutes exist, but no formal Syndicate or University-level 
-  Academic Council resolution approving the VMO is included.
-
-✗ Checkpoint 7 — Web Link: NOT present. No URL or portal link showing publicly 
-  accessible VMO is provided.
-
-✗ Checkpoint 8 — Handbook/Brochure Inclusion: NOT present. No handbook or brochure 
-  excerpt demonstrating VMO inclusion is included.
+ADDITIONAL EVIDENCE PRESENT IN THIS PACKAGE:
+- Summer 2022 BAC Governance Report showing multi-stakeholder satisfaction survey 
+  (89 total participants: 8 faculty, 50 students, 1 staff, 30 alumni); criterion 
+  1.1 scored 4/5 with 79.5% average satisfaction, exceeding the 70% KPI threshold
+- 18-question survey questionnaire form covering all 6 governance criteria
+- Classroom Facilities Compliance Certificate (January 2024) for rooms 302–307, 
+  signed by the Dean — useful supplementary evidence for Standard 1 generally
 
 NOTABLE STRENGTHS FOR AI REFERENCE:
-- Multi-year meeting trail (2022–2024) demonstrates sustained institutional effort
-- Stakeholder survey covers all four groups: faculty, students, staff, alumni
-- Survey report includes quantitative analysis with bar charts and percentage scores
-- Final VMO text is complete, professionally written, and clearly linked to CSE 4IR context
-- The VMO development process followed a proper participatory, stakeholder-driven approach
+- Multi-stage participatory process: survey design → data collection → analysis → 
+  formal V&M finalization — this is the correct evidence chain BAC expects
+- Stakeholder coverage: faculty, students, staff, and alumni all surveyed
+- Formal committee established with named convener and members (Nov 2024 meeting)
+- 79.5% stakeholder satisfaction rate exceeds the 70% KPI threshold
+- Multiple signed meeting minutes with faculty name lists
 
 KNOWN GAPS IN THIS BENCHMARK (so AI does not over-reward):
-- No visible display evidence (photograph or screenshot)
-- No formal Syndicate/University AC resolution — only department-level minutes
-- No web link to a publicly accessible VMO page
-- No Handbook or Brochure excerpt showing VMO inclusion
-- Survey report has unfilled fields (total copies distributed/received are blank)
+- HEI-level (university-wide) V&M document not separately submitted
+- No photographic or physical evidence of visible display on campus
+- No handbook/brochure with V&M included
+- Some survey data fields are blank (total distributed/received copies not filled in)
+- Classroom Facilities Certificate is tangential to criterion 1.1 specifically
 
-USE THIS BENCHMARK TO: evaluate whether a user-submitted VMO evidence package 
-contains comparable documentary depth — multi-year meeting minutes, stakeholder 
-survey instruments and reports, and formally adopted VMO text. Do NOT penalize 
-documents from different institutions — evaluate process evidence, stakeholder 
-coverage, and checkpoint completeness.`,
+USE THIS BENCHMARK TO: evaluate whether a user-submitted V&M evidence package 
+demonstrates a comparable documented approval process, stakeholder consultation 
+trail, and formal resolution. Penalize submissions that claim approval without 
+signed minutes, or claim visibility/handbook inclusion without actual evidence. 
+Do NOT penalize for being from a different institution.`,
 
         descriptionHtml: `
-<p>This is a benchmark-quality VMO evidence package submitted for BAC criterion 1.1
-evaluation. It represents real institutional documents from KYAU CSE documenting the
-complete VMO development and approval process across 2022–2024.</p>
+<p>This is a benchmark evidence package submitted for BAC criterion 1.1 evaluation. It contains multiple documents spanning 2022–2024 that collectively demonstrate the process of developing, approving, and operationalizing the Vision, Mission &amp; Objectives of the CSE Department at KYAU.</p>
 <div style="margin-bottom: 12px;">
-  <p style="margin:0px;"><strong>DOCUMENT TYPE:</strong> Multi-document Evidence Package for Criterion 1.1</p>
+  <p style="margin:0px;"><strong>DOCUMENT TYPE:</strong> Multi-document evidence package (meeting notices, minutes, survey questionnaire, governance report, compliance certificate)</p>
   <p style="margin:0px;"><strong>INSTITUTION:</strong> Dept. of CSE, Khwaja Yunus Ali University (KYAU)</p>
-  <p style="margin:0px;"><strong>COVERS:</strong> Checkpoints 1–4 of BAC criterion 1.1 (with known gaps in checkpoints 5–8)</p>
+  <p style="margin:0px;"><strong>COVERS:</strong> Checkpoints 1 and 2 of the 4 BAC-required evidence items for criterion 1.1</p>
 </div>
 <p><strong>WHAT THIS BENCHMARK SATISFIES:</strong></p>
 <ul>
-  <li><strong>Checkpoint 1 — Statement of Mission/Vision of PoE:</strong> Present. VMO
-  formally finalized and adopted in the 7th Academic Committee Meeting (July 18, 2024),
-  signed by the Head of Department, with the full VMO text on record.</li>
-  <li><strong>Checkpoint 2 — Meeting Minutes for VMO Approval:</strong> Present and
-  multi-layered — minutes from 28.4.2022 (committee formed), 12.5.2022 (survey approved),
-  16.6.2022 (VMO finalized), July 18 2024 (VMO formally adopted), and November 18 2024
-  (further institutional alignment committee established).</li>
-  <li><strong>Checkpoint 3 — Stakeholder Acceptance Survey Instrument:</strong> Present.
-  An 18-question formal questionnaire covering all 6 governance criteria; questions 1–3
-  address criterion 1.1 specifically.</li>
-  <li><strong>Checkpoint 4 — Survey Report with Quantitative Analysis:</strong> Present.
-  Summer 2022 CSEPAC report includes criterion 1.1 results: 75% faculty, 79% students,
-  100% staff, 64% alumni — overall 79.5%, exceeding the 70% KPI. Score: 4/5.</li>
-  <li><strong>Checkpoint 5 — Visible Display Evidence:</strong> <em>NOT present.</em>
-  No photograph, notice board image, or screenshot is included.</li>
-  <li><strong>Checkpoint 6 — AC/Syndicate Resolution:</strong> <em>Partially present.</em>
-  Department-level minutes exist but no formal Syndicate or University AC resolution.</li>
-  <li><strong>Checkpoint 7 — Web Link:</strong> <em>NOT present.</em></li>
-  <li><strong>Checkpoint 8 — Handbook/Brochure Inclusion:</strong> <em>NOT present.</em></li>
+  <li><strong>Checkpoint 1 — Copy of defined Vision/Mission/Objectives of HEI and PoE:</strong> Partially present. The July 18, 2024 Academic Committee meeting formally resolved the PoE Vision and Mission with full text and HOD signature. However, a separate standalone HEI-level (university-wide) V&amp;M document is not included — only the PoE-level statement is documented here.</li>
+  <li><strong>Checkpoint 2 — Minutes of Meeting for Approval:</strong> Present, across multiple meetings. The process is documented in stages: April 28 2022 → May 12 2022 → June 16 2022 → July 18 2024 → November 18 2024. All minutes have faculty signatures.</li>
+  <li><strong>Checkpoint 3 — Visible Display:</strong> Not demonstrated. No photographs or signed attestation of physical display is included — this is a significant gap.</li>
+  <li><strong>Checkpoint 4 — Included in Handbook/Brochure:</strong> Not demonstrated. No handbook or brochure excerpt is included — another significant gap.</li>
 </ul>
 <p><strong>NOTABLE STRENGTHS FOR AI REFERENCE:</strong></p>
 <ul>
-  <li>Multi-year meeting trail (2022–2024) shows sustained institutional commitment</li>
-  <li>Survey covers all four stakeholder groups: faculty, students, staff, alumni</li>
-  <li>Quantitative analysis with bar charts and percentage scores against 70% KPI</li>
-  <li>Final VMO text is complete and professionally written</li>
-  <li>Proper participatory development process documented end-to-end</li>
+  <li>Multi-stage participatory process: survey design → data collection → analysis → formal V&amp;M finalization</li>
+  <li>Stakeholder coverage: faculty, students, staff, and alumni all surveyed (89 total participants)</li>
+  <li>79.5% stakeholder satisfaction rate exceeds the 70% KPI threshold; criterion 1.1 scored 4/5</li>
+  <li>Formal committee established with named convener and members</li>
+  <li>Multiple signed meeting minutes with faculty name lists</li>
 </ul>
 <p><strong>KNOWN GAPS IN THIS BENCHMARK (so AI does not over-reward):</strong></p>
 <ul>
-  <li>No visible display evidence (photograph or screenshot)</li>
-  <li>No formal Syndicate/University AC resolution — only department-level minutes</li>
-  <li>No web link to a publicly accessible VMO page</li>
-  <li>No Handbook or Brochure excerpt showing VMO inclusion</li>
-  <li>Survey report has unfilled fields (distributed/received counts are blank)</li>
+  <li>HEI-level (university-wide) V&amp;M document not separately submitted</li>
+  <li>No photographic or physical evidence of visible display on campus</li>
+  <li>No handbook/brochure with V&amp;M included</li>
+  <li>Some survey data fields are blank (total distributed/received copies not filled in)</li>
 </ul>
-<p><strong>USE THIS BENCHMARK TO:</strong> evaluate whether a user-submitted VMO evidence
-package contains comparable documentary depth — multi-year minutes, stakeholder survey
-instruments and reports, and formally adopted VMO text. Do NOT penalize documents from
-different institutions — evaluate process evidence, stakeholder coverage, and checkpoint
-completeness.</p>`,
+<p><strong>USE THIS BENCHMARK TO:</strong> evaluate whether a user-submitted V&amp;M evidence package demonstrates a comparable documented approval process, stakeholder consultation trail, and formal resolution. Penalize submissions that claim approval without signed minutes, or claim visibility/handbook inclusion without actual evidence.</p>`,
 
         content: `Proceedings of the 1 th Meeting of the Academic Committee of the Department of
 Computer Science and Engineering
@@ -2572,85 +2547,77 @@ Department of Computer Science and Engineering
         id: "c1-1",
         code: "1.1",
         title: "Vision, Mission & Objectives",
-        description: `The vision, mission, and objectives of the Program Offering Entity (PoE) 
-must be clearly defined, formally documented, and aligned with those of the Higher 
-Education Institution (HEI). They must demonstrate the way that they will serve 
-the purposes of the stakeholders and society at large.
+        description: `The PoE must have formally defined and documented vision, mission, 
+and objectives that are in accordance with those of the HEI, and must demonstrate 
+the way that will serve the purposes of the stakeholders and society at large.
 
-This criterion requires that the VMO is not merely stated but formally approved 
-through official institutional channels (Academic Council/Syndicate), visibly 
-displayed for all stakeholders, and included in official publications such as the 
-departmental handbook or brochure. The approval process must involve genuine 
-stakeholder engagement — demonstrated through a formal survey mechanism and its 
-analysis report — and the final VMO must be publicly accessible via a web link.`,
+This criterion requires evidence that the PoE's vision, mission, and objectives 
+are not only clearly written, but are institutionally approved through a formal 
+process, actively displayed in visible locations on campus, and included in 
+official institutional documents such as the Handbook and/or Brochure.
+
+BAC requires 4 documentary checkpoints:
+- Checkpoint 1: Copy of the defined vision, mission, and objectives of both the 
+  HEI and the PoE (showing alignment between institutional and departmental levels)
+- Checkpoint 2: Minutes of meeting regarding the approval of the vision, mission, 
+  and objectives by appropriate authority
+- Checkpoint 3: Evidence of visible display (e.g., on notice boards, walls, or 
+  public spaces within the department/institution)
+- Checkpoint 4: Inclusion of vision, mission, and objectives in the official 
+  Handbook and/or Brochure of the institution or department`,
 
         descriptionHtml: `
-<p>The vision, mission, and objectives of the Program Offering Entity (PoE) must be
-clearly defined, formally documented, and aligned with those of the Higher Education
-Institution (HEI). They must demonstrate the way that they will serve the purposes of
-the stakeholders and society at large.</p>
-<p>This criterion requires that the VMO is not merely stated but formally approved
-through official institutional channels (Academic Council/Syndicate), visibly displayed
-for all stakeholders, and included in official publications such as the departmental
-handbook or brochure. The approval process must involve genuine stakeholder engagement
-— demonstrated through a formal survey mechanism and its analysis report — and the
-final VMO must be publicly accessible via a web link.</p>`,
+<p>The PoE must have formally defined and documented vision, mission, and objectives that are in accordance with those of the HEI, and must demonstrate the way that will serve the purposes of the stakeholders and society at large.</p>
+<p>This criterion requires evidence that the PoE's vision, mission, and objectives are not only clearly written, but are institutionally approved through a formal process, actively displayed in visible locations on campus, and included in official institutional documents such as the Handbook and/or Brochure.</p>
+<p><strong>BAC requires 4 documentary checkpoints:</strong></p>
+<ul>
+  <li><strong>Checkpoint 1:</strong> Copy of the defined vision, mission, and objectives of both the HEI and the PoE (showing alignment between institutional and departmental levels)</li>
+  <li><strong>Checkpoint 2:</strong> Minutes of meeting regarding the approval of the vision, mission, and objectives by appropriate authority</li>
+  <li><strong>Checkpoint 3:</strong> Evidence of visible display (e.g., on notice boards, walls, or public spaces within the department/institution)</li>
+  <li><strong>Checkpoint 4:</strong> Inclusion of vision, mission, and objectives in the official Handbook and/or Brochure of the institution or department</li>
+</ul>`,
 
         requiredFiles: [
-          "Resolution of the AC & Syndicate formally approving the Vision, Mission & Objectives",
-          "Statement of Mission/Vision of the PoE (formally documented)",
-          "Stakeholder acceptance survey instrument (questionnaire form)",
-          "Stakeholder acceptance survey report with quantitative analysis",
-          "Evidence of visible display of VMO (photograph, notice board image, or web screenshot)",
-          "Meeting minutes from multiple years showing VMO review and adoption",
-          "Approval letter from AC/HEI authority",
-          "Web link to publicly accessible Vision/Mission statement",
-          "Handbook or Brochure showing inclusion of Vision/Mission & Objectives",
+          "Copy of defined Vision, Mission, and Objectives of the HEI",
+          "Copy of defined Vision, Mission, and Objectives of the PoE (showing alignment with HEI)",
+          "Minutes of Meeting — Approval of Vision, Mission, and Objectives",
+          "Evidence of Visible Display (photographs or attestation of physical display on campus)",
+          "Handbook and/or Brochure showing inclusion of Vision, Mission, and Objectives",
         ],
 
-        guidelines: `The VMO must be documented for BOTH the HEI and the PoE, with 
-explicit alignment shown between the two levels. Approval must be evidenced by 
-formal minutes of an Academic Council or Syndicate meeting — department-level 
-committee minutes alone are insufficient unless they reference or attach a 
-higher-level institutional resolution. Stakeholder input must be collected through 
-a formal survey instrument and the resulting analysis report must include 
-quantitative data demonstrating that the VMO serves the purposes of faculty, 
-students, staff, and alumni. Visible display evidence must be concrete (photograph, 
-website screenshot, or notice board image) — stating "it is displayed" without 
-supporting evidence is not acceptable. The VMO must be accessible to the public 
-through a verifiable web link, and must appear in at least one official publication 
-such as a handbook or brochure.`,
+        guidelines: `Both the HEI-level and PoE-level vision, mission, and objectives must 
+be separately documented and submitted — evaluators must be able to confirm that the 
+PoE's statement aligns with and supports the HEI's. The vision/mission must explicitly 
+articulate service to stakeholders and society, not merely describe technical or 
+academic aspirations. Approval must be evidenced by formal signed meeting minutes — 
+informal decisions or undated documents are not acceptable. Visible display must be 
+supported by photographic evidence or a signed attestation from an authorized person; 
+a verbal claim is insufficient. Inclusion in the Handbook/Brochure must be demonstrated 
+with an actual excerpt or clearly marked page from the document — stating inclusion 
+without evidence is not accepted. Evaluators should check that the PoE's statement 
+reflects a stakeholder-oriented purpose and is not merely an internal academic 
+objective.`,
 
         guidelinesHtml: `
-<p>The VMO must be documented for <strong>BOTH</strong> the HEI and the PoE, with
-explicit alignment shown between the two levels.</p>
-<ul>
-  <li>Approval must be evidenced by formal minutes of an Academic Council or Syndicate
-  meeting — department-level committee minutes alone are insufficient unless they
-  reference or attach a higher-level institutional resolution.</li>
-  <li>Stakeholder input must be collected through a formal survey instrument and the
-  resulting analysis report must include quantitative data demonstrating that the VMO
-  serves the purposes of faculty, students, staff, and alumni.</li>
-  <li>Visible display evidence must be concrete (photograph, website screenshot, or
-  notice board image) — stating "it is displayed" without supporting evidence is not
-  acceptable.</li>
-  <li>The VMO must be accessible to the public through a verifiable web link, and must
-  appear in at least one official publication such as a handbook or brochure.</li>
-</ul>`,
+<p>Both the HEI-level and PoE-level vision, mission, and objectives must be separately documented and submitted — evaluators must be able to confirm that the PoE's statement aligns with and supports the HEI's.</p>
+<p>The vision/mission must explicitly articulate service to stakeholders and society, not merely describe technical or academic aspirations.</p>
+<p>Approval must be evidenced by <strong>formal signed meeting minutes</strong> — informal decisions or undated documents are not acceptable.</p>
+<p>Visible display must be supported by <strong>photographic evidence</strong> or a signed attestation from an authorized person; a verbal claim is insufficient.</p>
+<p>Inclusion in the Handbook/Brochure must be demonstrated with an <strong>actual excerpt or clearly marked page</strong> from the document — stating inclusion without evidence is not accepted.</p>
+<p>Evaluators should check that the PoE's statement reflects a stakeholder-oriented purpose and is not merely an internal academic objective.</p>`,
 
         weight: 5,
 
         checklistItems: [
-          "Vision, mission, and objectives of the PoE are clearly documented as a formal statement",
-          "Vision, mission, and objectives of the HEI are documented and shown to align with the PoE's",
-          "Resolution or minutes of AC/Syndicate formally approving the VMO are present",
-          "A stakeholder acceptance survey instrument (questionnaire form) is included",
-          "A survey analysis report with quantitative stakeholder satisfaction data is included",
-          "Evidence of visible display of the VMO (photograph, screenshot, or notice) is provided",
-          "Meeting minutes from multiple years showing VMO development and review are present",
-          "An approval letter from AC/HEI authority is present",
-          "A web link to the publicly accessible VMO is provided",
-          "The VMO is included in the departmental Handbook or Brochure",
+          "Vision, mission, and objectives of the HEI are separately documented and submitted",
+          "Vision, mission, and objectives of the PoE are clearly defined and formally stated",
+          "PoE vision/mission is demonstrably aligned with HEI vision/mission",
+          "The statement articulates how the PoE serves stakeholders and society at large",
+          "Minutes of meeting for formal approval of the vision/mission/objectives are present",
+          "Approval minutes are signed by the appropriate authority",
+          "Evidence of visible physical display on campus is provided (photos or attestation)",
+          "Vision/mission/objectives are included in the official Handbook and/or Brochure",
+          "Handbook/Brochure evidence is an actual excerpt or marked copy, not just a claim",
         ],
       },
       {
