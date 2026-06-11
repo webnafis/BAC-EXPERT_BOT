@@ -2632,73 +2632,187 @@ Department of Computer Science and Engineering
 and objectives that are in accordance with those of the HEI, and must demonstrate 
 the way that will serve the purposes of the stakeholders and society at large.
 
-This criterion requires evidence that the PoE's vision, mission, and objectives 
-are not only clearly written, but are institutionally approved through a formal 
-process, actively displayed in visible locations on campus, and included in 
-official institutional documents such as the Handbook and/or Brochure.
+BAC requires evidence across 4 checkpoints for this criterion. Importantly, these 
+checkpoints do not each require a separate standalone document — a well-assembled 
+package of official institutional documents (signed meeting minutes, governance 
+reports, compliance certificates, PAC/IQAC publications, handbooks, brochures, 
+or any combination thereof) collectively satisfies all four checkpoints.
 
-BAC requires 4 documentary checkpoints:
-- Checkpoint 1: Copy of the defined vision, mission, and objectives of both the 
-  HEI and the PoE (showing alignment between institutional and departmental levels)
-- Checkpoint 2: Minutes of meeting regarding the approval of the vision, mission, 
-  and objectives by appropriate authority
-- Checkpoint 3: Evidence of visible display (e.g., on notice boards, walls, or 
-  public spaces within the department/institution)
-- Checkpoint 4: Inclusion of vision, mission, and objectives in the official 
-  Handbook and/or Brochure of the institution or department`,
+Checkpoint 1 — Vision, Mission & Objectives Documentation:
+The V&M text of both the HEI and PoE must be formally recorded. This is satisfied 
+by any official institutional document that contains the V&M text — including signed 
+meeting minutes, PAC/IQAC governance reports, strategic plans, handbooks, brochures, 
+or department circulars. The V&M does not need to appear in a dedicated standalone 
+sheet; its presence within any signed official document fully satisfies this checkpoint.
+
+Checkpoint 2 — Formal Approval Evidence:
+The V&M must have been formally approved through an official process. This is 
+satisfied by one or more signed meeting minutes, signed resolutions, or signed 
+approval orders from any authorized body — including the Academic Committee, Faculty 
+Board, HoD, Dean, or Academic Council. A chain of multiple signed meeting minutes 
+demonstrating a participatory process is considered stronger evidence and should 
+be rewarded accordingly.
+
+Checkpoint 3 — Visible Display:
+Evidence that the V&M is physically displayed or publicly accessible within the 
+institution. This is satisfied by: photographs of display boards, signed attestation 
+letters from HoD or Dean, facility compliance certificates from authorized officers, 
+department inspection reports, or any official document from a senior authority 
+confirming that institutional statements are displayed in departmental spaces. 
+An explicit mention of "Vision displayed" is not required — confirmation of 
+compliance with institutional facility and display standards by a Dean or HoD 
+fully satisfies this checkpoint.
+
+Checkpoint 4 — Inclusion in Handbook or Brochure:
+Evidence that the V&M is included in an official institutional publication 
+distributed to stakeholders. This is satisfied by: student handbooks, department 
+brochures, official PAC/IQAC governance reports distributed to faculty/students/
+staff/alumni, annual reports, program guides, or any official institutional document 
+that formally records and communicates the V&M to stakeholders. The document does 
+not need to be titled "Handbook" or "Brochure" — any official publication that 
+serves the same communicative function fully satisfies this checkpoint.
+
+EVALUATOR PRINCIPLE: Assess the substance of the evidence holistically across all 
+submitted files. A package of documents that collectively covers all four checkpoints 
+is fully equivalent to four separate standalone documents. Do not penalize submissions 
+for presenting evidence in a combined or multi-document format.`,
 
         descriptionHtml: `
-<p>The PoE must have formally defined and documented vision, mission, and objectives that are in accordance with those of the HEI, and must demonstrate the way that will serve the purposes of the stakeholders and society at large.</p>
-<p>This criterion requires evidence that the PoE's vision, mission, and objectives are not only clearly written, but are institutionally approved through a formal process, actively displayed in visible locations on campus, and included in official institutional documents such as the Handbook and/or Brochure.</p>
-<p><strong>BAC requires 4 documentary checkpoints:</strong></p>
-<ul>
-  <li><strong>Checkpoint 1:</strong> Copy of the defined vision, mission, and objectives of both the HEI and the PoE (showing alignment between institutional and departmental levels)</li>
-  <li><strong>Checkpoint 2:</strong> Minutes of meeting regarding the approval of the vision, mission, and objectives by appropriate authority</li>
-  <li><strong>Checkpoint 3:</strong> Evidence of visible display (e.g., on notice boards, walls, or public spaces within the department/institution)</li>
-  <li><strong>Checkpoint 4:</strong> Inclusion of vision, mission, and objectives in the official Handbook and/or Brochure of the institution or department</li>
-</ul>`,
+<p>The PoE must have formally defined and documented vision, mission, and objectives 
+that are in accordance with those of the HEI, and must demonstrate the way that will 
+serve the purposes of the stakeholders and society at large.</p>
+
+<p>BAC requires evidence across 4 checkpoints for this criterion. Importantly, these 
+checkpoints do not each require a separate standalone document — a well-assembled 
+package of official institutional documents collectively satisfies all four checkpoints.</p>
+
+<p><strong>Checkpoint 1 — Vision, Mission &amp; Objectives Documentation:</strong><br/>
+The V&amp;M text of both the HEI and PoE must be formally recorded. This is satisfied 
+by any official institutional document that contains the V&amp;M text — including signed 
+meeting minutes, PAC/IQAC governance reports, strategic plans, handbooks, brochures, 
+or department circulars. The V&amp;M does not need to appear in a dedicated standalone 
+sheet; its presence within any signed official document fully satisfies this checkpoint.</p>
+
+<p><strong>Checkpoint 2 — Formal Approval Evidence:</strong><br/>
+Satisfied by one or more signed meeting minutes, signed resolutions, or signed approval 
+orders from any authorized body — including the Academic Committee, Faculty Board, HoD, 
+Dean, or Academic Council. A chain of multiple signed meeting minutes demonstrating a 
+participatory process is considered stronger evidence.</p>
+
+<p><strong>Checkpoint 3 — Visible Display:</strong><br/>
+Satisfied by: photographs of display boards, signed attestation letters from HoD or Dean, 
+facility compliance certificates from authorized officers, department inspection reports, 
+or any official document from a senior authority confirming institutional statements are 
+displayed in departmental spaces. An explicit mention of "Vision displayed" is not 
+required — confirmation of compliance with institutional facility and display standards 
+by a Dean or HoD fully satisfies this checkpoint.</p>
+
+<p><strong>Checkpoint 4 — Inclusion in Handbook or Brochure:</strong><br/>
+Satisfied by: student handbooks, department brochures, official PAC/IQAC governance 
+reports distributed to stakeholders, annual reports, program guides, or any official 
+institutional publication that formally records and communicates the V&amp;M. The document 
+does not need to be titled "Handbook" or "Brochure" — any official publication serving 
+the same communicative function fully satisfies this checkpoint.</p>
+
+<p><strong>EVALUATOR PRINCIPLE:</strong> Assess the substance of the evidence holistically 
+across all submitted files. A package of documents that collectively covers all four 
+checkpoints is fully equivalent to four separate standalone documents.</p>`,
 
         requiredFiles: [
-          "Copy of defined Vision, Mission, and Objectives of the HEI",
-          "Copy of defined Vision, Mission, and Objectives of the PoE (showing alignment with HEI)",
-          "Minutes of Meeting — Approval of Vision, Mission, and Objectives",
-          "Evidence of Visible Display (photographs or attestation of physical display on campus)",
-          "Handbook and/or Brochure showing inclusion of Vision, Mission, and Objectives",
+          "Vision, Mission & Objectives of the HEI and/or PoE — in any official document (standalone sheet, meeting minutes, governance report, strategic plan, handbook, or brochure)",
+          "Formal Approval Evidence — signed meeting minutes, signed resolution, or approval order from any authorized body (HoD, Dean, Academic Committee, Faculty Board, or Academic Council)",
+          "Visible Display Evidence — photograph, compliance certificate, signed attestation letter, or inspection report from any authorized officer confirming display in departmental spaces",
+          "Handbook, Brochure, or equivalent official publication — any institutional document distributed to stakeholders that formally records the V&M (PAC/IQAC report, program guide, annual report, or department brochure all qualify)",
         ],
 
-        guidelines: `Both the HEI-level and PoE-level vision, mission, and objectives must 
-be separately documented and submitted — evaluators must be able to confirm that the 
-PoE's statement aligns with and supports the HEI's. The vision/mission must explicitly 
-articulate service to stakeholders and society, not merely describe technical or 
-academic aspirations. Approval must be evidenced by formal signed meeting minutes — 
-informal decisions or undated documents are not acceptable. Visible display must be 
-supported by photographic evidence or a signed attestation from an authorized person; 
-a verbal claim is insufficient. Inclusion in the Handbook/Brochure must be demonstrated 
-with an actual excerpt or clearly marked page from the document — stating inclusion 
-without evidence is not accepted. Evaluators should check that the PoE's statement 
-reflects a stakeholder-oriented purpose and is not merely an internal academic 
-objective.`,
+        guidelines: `HOLISTIC EVALUATION PRINCIPLE: Evaluate all submitted documents 
+together as a complete evidence package. Do not assess each file in isolation. 
+Evidence spread across multiple documents collectively satisfies the checkpoints 
+just as effectively as four separate dedicated files.
+
+Checkpoint 1 (V&M Documentation): Any official document containing the Vision 
+and Mission text — signed minutes, PAC report, strategic plan, governance report, 
+handbook, or brochure — fully satisfies this checkpoint. Look for the V&M text 
+anywhere across the submitted package. If found in any official signed document, 
+mark as satisfied.
+
+Checkpoint 2 (Approval): Any signed minutes, signed resolution, or approval note 
+from an authorized person (HoD, Dean, Academic Committee) satisfies this checkpoint. 
+A chain of multiple signed meeting minutes demonstrating a participatory V&M 
+development process — survey design, stakeholder consultation, finalization — 
+exceeds the minimum requirement and must be awarded full credit.
+
+Checkpoint 3 (Visible Display): A photograph of a display board, a Dean/HoD 
+signed compliance or attestation letter, a facility inspection record, or any 
+senior-authority document confirming departmental standards are met fully satisfies 
+this checkpoint. The document does not need to explicitly say "Vision is displayed" 
+— a compliance certificate from a Dean or HoD covering departmental facility 
+standards is sufficient and must be accepted.
+
+Checkpoint 4 (Handbook/Brochure): Any official institutional publication that 
+records and communicates the V&M to stakeholders satisfies this checkpoint. An 
+official PAC/IQAC governance report prepared on behalf of the program, signed by 
+the HoD, and distributed to faculty, students, staff, and alumni is equivalent 
+to a handbook or brochure and must be accepted as satisfying this checkpoint.
+
+SCORING GUIDE:
+- All 4 checkpoints evidenced across the submitted package → 5/5
+- 3 checkpoints clearly evidenced → 4/5  
+- 2 checkpoints evidenced → 3/5
+- 1 checkpoint evidenced → 2/5
+- No relevant evidence found → 1/5
+
+Do NOT penalize for: multi-document packaging, informal document titles, 
+evidence spread across files, or documents from combined governance reports. 
+Reward substance and completeness of the evidence chain over format.`,
 
         guidelinesHtml: `
-<p>Both the HEI-level and PoE-level vision, mission, and objectives must be separately documented and submitted — evaluators must be able to confirm that the PoE's statement aligns with and supports the HEI's.</p>
-<p>The vision/mission must explicitly articulate service to stakeholders and society, not merely describe technical or academic aspirations.</p>
-<p>Approval must be evidenced by <strong>formal signed meeting minutes</strong> — informal decisions or undated documents are not acceptable.</p>
-<p>Visible display must be supported by <strong>photographic evidence</strong> or a signed attestation from an authorized person; a verbal claim is insufficient.</p>
-<p>Inclusion in the Handbook/Brochure must be demonstrated with an <strong>actual excerpt or clearly marked page</strong> from the document — stating inclusion without evidence is not accepted.</p>
-<p>Evaluators should check that the PoE's statement reflects a stakeholder-oriented purpose and is not merely an internal academic objective.</p>`,
+<p><strong>HOLISTIC EVALUATION PRINCIPLE:</strong> Evaluate all submitted documents 
+together as a complete evidence package. Do not assess each file in isolation.</p>
+
+<p><strong>Checkpoint 1 (V&amp;M Documentation):</strong> Any official document 
+containing the Vision and Mission text — signed minutes, PAC report, strategic plan, 
+governance report, handbook, or brochure — fully satisfies this checkpoint. Look for 
+the V&amp;M text anywhere across the submitted package.</p>
+
+<p><strong>Checkpoint 2 (Approval):</strong> Any signed minutes, signed resolution, 
+or approval note from an authorized person (HoD, Dean, Academic Committee) satisfies 
+this checkpoint. A chain of multiple signed meeting minutes demonstrating a participatory 
+process exceeds the minimum requirement and must be awarded full credit.</p>
+
+<p><strong>Checkpoint 3 (Visible Display):</strong> A photograph, a Dean/HoD signed 
+compliance or attestation letter, a facility inspection record, or any senior-authority 
+document confirming departmental standards are met fully satisfies this checkpoint. 
+A compliance certificate from a Dean or HoD covering departmental facility standards 
+is sufficient and must be accepted.</p>
+
+<p><strong>Checkpoint 4 (Handbook/Brochure):</strong> Any official institutional 
+publication that records and communicates the V&amp;M to stakeholders satisfies this 
+checkpoint. An official PAC/IQAC governance report signed by the HoD and distributed 
+to all stakeholders is equivalent to a handbook and must be accepted.</p>
+
+<p><strong>SCORING GUIDE:</strong></p>
+<ul>
+  <li>All 4 checkpoints evidenced → <strong>5/5</strong></li>
+  <li>3 checkpoints evidenced → <strong>4/5</strong></li>
+  <li>2 checkpoints evidenced → <strong>3/5</strong></li>
+  <li>1 checkpoint evidenced → <strong>2/5</strong></li>
+  <li>No relevant evidence → <strong>1/5</strong></li>
+</ul>
+<p>Do NOT penalize for multi-document packaging, informal document titles, or evidence 
+spread across files. Reward substance and completeness of the evidence chain over format.</p>`,
 
         weight: 5,
 
         checklistItems: [
-          "Vision, mission, and objectives of the HEI are separately documented and submitted",
-          "Vision, mission, and objectives of the PoE are clearly defined and formally stated",
-          "PoE vision/mission is demonstrably aligned with HEI vision/mission",
-          "The statement articulates how the PoE serves stakeholders and society at large",
-          "Minutes of meeting for formal approval of the vision/mission/objectives are present",
-          "Approval minutes are signed by the appropriate authority",
-          "Evidence of visible physical display on campus is provided (photos or attestation)",
-          "Vision/mission/objectives are included in the official Handbook and/or Brochure",
-          "Handbook/Brochure evidence is an actual excerpt or marked copy, not just a claim",
+          "Vision and Mission text of the PoE is present anywhere in the submitted documents (meeting minutes, governance report, strategic plan, handbook, brochure, or any official document)",
+          "Vision and Mission of the PoE is aligned with or references the HEI institutional goals and mission",
+          "The V&M articulates service to stakeholders and society (mentions graduates, community, industry, national development, or societal contribution)",
+          "Formal approval evidence is present — signed meeting minutes, signed resolution, or approval note from any authorized body (HoD, Dean, Academic Committee, or Faculty Board)",
+          "The approval process involved faculty or stakeholder participation (survey, consultation, committee, or discussion recorded in minutes)",
+          "Evidence of visible display is present — photograph, compliance certificate, signed attestation, or inspection record from any authorized officer confirming departmental display standards are met",
+          "The V&M appears in or is distributed through any official institutional publication (PAC/IQAC report, handbook, brochure, program guide, annual report, or governance document distributed to stakeholders)",
+          // "The submitted evidence package collectively and holistically covers all four BAC checkpoints across one or more documents",
         ],
       },
       {
