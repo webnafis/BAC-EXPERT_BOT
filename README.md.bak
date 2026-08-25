@@ -1,0 +1,43 @@
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+## What this project is
+- A Next.js-based UI application (likely an e-commerce or expert system front-end named BAC-EXPERT_BOT).
+- Contains pages and components built with the App Router (or Pages Router) depending on the Next.js version used.
+
+## Requirements
+- Node.js (>= 16)
+- npm, yarn, or pnpm
+
+## Quick start (development)
+1. Install dependencies
+```bash
+npm install
+# or
+# yarn
+# pnpm install
+```
+2. Run development server
+```bash
+npm run dev
+```
+3. Open in browser
+```
+http://localhost:3000
+```
+
+## Build & production
+```bash
+npm run build
+npm start
+# or
+# npm run start (as configured)
+```
+
+## Deployment
+- This app can be deployed to Vercel for best compatibility with Next.js, or any Node.js hosting platform that supports Next.js builds.
+
+## Contributing
+- Open an issue or PR with clear steps to reproduce bugs or the feature you want to add.
+
+## License
+Add a LICENSE file (e.g., MIT) if you want to release this project under an open-source license.
